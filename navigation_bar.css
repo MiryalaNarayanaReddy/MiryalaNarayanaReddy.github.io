@@ -1,0 +1,229 @@
+/* desktop */
+
+@media screen and (min-width: 1000px) {
+  * {
+    margin: 0px;
+    padding: 0px;
+  }
+
+  /* nav bar */
+
+  #navbar {
+    display: flex;
+    align-items: center;
+    top: 0px;
+    position: sticky;
+  }
+
+  #navbar img {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 70px;
+    height: 70px;
+    border-radius: 100%;
+  }
+
+  #navbar::before {
+    content: "";
+    background-color: black;
+    position: absolute; /* to be removed*/
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+    opacity: 0.6;
+  }
+
+  #nav_item {
+    list-style-type: none;
+    display: flex;
+  }
+
+  #nav_item li {
+    padding: 5px;
+    margin: 5px;
+  }
+
+  #nav_item li a {
+    text-decoration: none;
+    border-radius: 10px;
+    padding: 4px;
+    color: white;
+  }
+
+  #nav_item li a:hover {
+    text-decoration: none;
+    border-radius: 10px;
+    padding: 4px;
+    color: black;
+    background-color: white;
+  }
+
+  /* side heading */
+
+  #navbar #sideheading {
+    margin-inline-start: auto; /* */
+    margin-right: 100px;
+    color: white;
+    font-family: sans-serif;
+    font-size: 3rem;
+    display: flex;
+  }
+}
+
+/* i pad */
+
+@media screen and (min-width: 768px) and (max-width: 1000px) {
+  * {
+    margin: 0px;
+    padding: 0px;
+  }
+
+  /* nav bar */
+
+  #navbar {
+    display: flex;
+    width: auto;
+    align-items: center;
+    top: 0px;
+    position: relative;
+  }
+
+  #navbar img {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 70px;
+    height: 70px;
+    border-radius: 100%;
+  }
+
+  #navbar::before {
+    content: "";
+    background-color: black;
+    position: absolute; /* to be removed*/
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+    opacity: 0.6;
+  }
+
+  #nav_item {
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  #nav_item li {
+    padding: 5px;
+    margin: 5px;
+  }
+
+  #nav_item li a {
+    text-decoration: none;
+    border-radius: 10px;
+    padding: 4px;
+    color: white;
+  }
+
+  #nav_item li a:hover {
+    text-decoration: none;
+    border-radius: 10px;
+    padding: 4px;
+    color: black;
+    background-color: white;
+  }
+
+  /* side heading */
+
+  #navbar #sideheading {
+    margin-inline-start: auto; /* */
+    margin-right: 100px;
+    color: white;
+    font-family: sans-serif;
+    font-size: 3rem;
+    display: flex;
+  }
+}
+
+
+/* Galaxy S5 */
+
+@media screen and (min-width: 100px) and (max-width: 767px) {
+  * {
+    margin: 0px;
+    padding: 0px;
+  }
+
+  /* nav bar */
+
+  #navbar {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    align-items: center;
+    top: 0px;
+    position: relative;
+  }
+
+  #navbar img {
+    padding:5px;
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+  }
+
+  #navbar::before {
+    content: "";
+    background-color: black;
+    position: absolute; /* to be removed*/
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+    opacity: 0.6;
+  }
+
+  #nav_item {
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  #nav_item li {
+    padding: 1px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  #nav_item li a {
+    text-decoration: none;
+    border-radius: 10px;
+    padding: 4px;
+    color: white;
+  }
+
+  #nav_item li a:hover {
+    text-decoration: none;
+    border-radius: 10px;
+    padding: 4px;
+    color: black;
+    background-color: white;
+  }
+
+  /* side heading */
+
+  #navbar #sideheading {
+    color: white;
+    font-family: sans-serif;
+    font-size: 2rem;
+    display: flex;
+  }
+}

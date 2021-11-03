@@ -1,0 +1,52 @@
+body {
+  background-image: url("../img/background_images/call.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 1000px;
+}
+
+#contact {
+  border-radius: 10px;
+  width: 500px;
+  margin-left: 100px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 50px;
+  /* border:2px solid rgb(255, 0, 0); */
+}
+
+#contact div {
+  font-size: 1.2rem;
+  display: flex;
+  padding: 5px;
+  color: rgb(138, 132, 132);
+}
+
+/* Galaxy s5 */
+
+@media screen and (min-width: 100px) and (max-width: 767px) {
+
+  body {
+    background-image: url("../img/background_images/responsive_call2.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 1000px;
+  }
+  #contact {
+    border-radius: 10px;
+    width: 340px;
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+    margin-top: 40px;
+    background-color: rgb(32, 85, 39);
+    opacity: 0.4;
+}
+  
+  #contact div {
+    font-size: 1.1rem;
+    display: flex;
+    color: rgb(253, 253, 253);
+  }
+  
+}

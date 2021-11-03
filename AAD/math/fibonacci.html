@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+    
+    <link rel="stylesheet" href="../../navigation_bar.css">
+    <link rel="stylesheet" href="../template.css">
+    <script src="../template.js"></script>
+    <script src="fibonacci.js"></script>
+
+    <title>fibonacci</title>
+</head>
+
+<body>
+    <nav id="navbar">
+        <img src="../../img/myimages/roundflower1.jpg" alt="">
+        <ul id="nav_item">
+            <li><a href="../../index.html" id="home" class="no-hover">Home</a></li>
+            <li><a href="../../html/Algorithms.html" id="Algorithms" class="no-hover">Algorithms</a></li>
+            <!-- <li><a href="Skills.html" id="Skills" class="no-hover">Skills</a></li>
+            <li><a href="Contact.html" id="Contact" class="no-hover"> Contact</a></li>
+            <li><a href="Education.html" id="Education" class="no-hover">Education</a></li>
+            <li><a href="sitemap.html" id="Sitemap" class="no-hover">Sitemap</a></li>
+            <li><a href="gallery.html" id="Gallery" class="no-hover">Gallery</a></li> -->
+        </ul>
+
+        <!-- <h1 id="sideheading">
+          Prime numbers
+        </h1> -->
+    </nav>
+    <h1 class="heading">Prime Numbers</h1>
+    <!-- prerequisites -->
+    <h2 class="side_heading">Prerequisites :</h2>
+
+    <span class="definition"> Fibonacci Numbers: </span>
+    <!-- <span class="text"> </span>
+    <p class="text"> If a number 'b' is a factor of 'a' then 'a' is divisible by 'b'. </p>
+    <p class="text"> prime numbers : 2, 3, 5, 7, 11, 13, 17, 19, .....</p> -->
+    <h2 class="side_heading">Problem :</h2>
+    <p class="text">finding nth fibonacci number.</p>
+    <!-- Algorithm -->
+    <h2 class="side_heading">Algorithm : </h2>
+
+    <!-- Method 1:  -->
+
+    <button onclick="Toggle('prime_method_1')">Method 1</button>
+    <div id="prime_method_1" class="methods">
+
+        <p class="text">we are given a number n .</p>
+        <p class="text">obviously n is divisible by one and itself.</p>
+        <p class="text">So , we check if there exists any number between 1 and n that divides n.</p>
+        <p class="text">If it exists then n is not prime</p>
+        <p class="text"> otherwise n is prime. </p>
+
+        <!-- Pseudo code -->
+        <h2 class="side_heading">Pseudo code : </h2>
+        <pre class="text prettyprint">
+    IsPrime :
+        if n &lt; 2 :
+            return false
+        if n==2 :
+            return true
+        for i = 3 to n :
+            if n is divisible by i :
+                return false
+        return true
+    </pre>
+
+
+        <!-- code -->
+        <h2 class="side_heading">Code : </h2>
+        <pre class="prettyprint">
+    // code to check if a given number is prime
+    // naive algorithm 
+    // complexity O(n)
+    
+    #include &lt;stdio.h&gt;
+    #include &lt;stdbool.h&gt;
+    
+    bool IsPrime(int n)
+    {
+        if (n &lt; 2)
+        {
+            return false;
+        }
+        else if (n == 2)
+        {
+            return true;
+        }
+    
+        for (int i = 2; i &lt; n; i++)
+        {
+            if (n % i == 0)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    int main()
+    {
+        int n;
+        printf("Enter a number: ");
+        scanf("%d", &n);
+        if (IsPrime(n))
+        {
+            printf("%d is a prime number\n", n);
+        }
+        else
+        {
+            printf("%d is not a prime number\n", n);
+        }
+    }
+    </pre>
+        <!-- Complexity Analysis -->
+        <h2 class="side_heading"> Complexity Analysis : </h2>
+        <p class="text">
+            we see that the algorithm has to go through n steps if n is prime else it is less than n but has an upper
+            bound
+            of O(n).
+            Hence Time complexity is O(n).
+        </p>
+
+    </div>
+
+    <!-- Method 2:  -->
+    <br>
+    <button onclick="Toggle('prime_method_2')">Method 2</button>
+    <div id="prime_method_2" class="methods">
+
+        <p class="text">In method 1, we ran the loop for all n numbers..can we optimize it ?</p>
+        <p class="text">Assume n = a.b for a, b &in; (1,n) </p>
+        <p class="text">Then we can say that one of a or b is less than or equal to n/2 . </p>
+        <p class="text">Hence checking only upto n/2 is enough </p>
+
+        <!-- Pseudo code -->
+        <h2 class="side_heading">Pseudo code : </h2>
+        <pre class="text prettyprint">
+    IsPrime :
+        if n &lt; 2 :
+            return false
+        if n==2 :
+            return true
+        for i = 3 to n/2 :
+            if n is divisible by i :
+                return false
+        return true
+    </pre>
+
+
+        <!-- code -->
+        <h2 class="side_heading">Code : </h2>
+        <pre class="prettyprint">
+    // code to check if a given number is prime
+    //  algorithm
+    // complexity O(n/2)
+    
+    #include &lt;stdio.h&gt;
+    #include &lt;stdbool.h&gt;
+    
+    bool IsPrime(int n)
+    {
+        if (n &lt; 2)
+        {
+            return false;
+        }
+        else if (n == 2)
+        {
+            return true;
+        }
+    
+        for (int i = 2; i &lt;= n / 2; i++)
+        {
+            if (n % i == 0)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    int main()
+    {
+        int n;
+        printf("Enter a number: ");
+        scanf("%d", &n);
+        if (IsPrime(n))
+        {
+            printf("%d is a prime number\n", n);
+        }
+        else
+        {
+            printf("%d is not a prime number\n", n);
+        }
+    }
+    </pre>
+        <!-- Complexity Analysis -->
+        <h2 class="side_heading"> Complexity Analysis : </h2>
+        <p class="text">
+            we see that the algorithm has to go through n/2 steps if n is prime but has an upper bound of O(n/2).
+            Hence Time complexity is O(n/2).
+        </p>
+
+    </div>
+
+    <!-- Method 3:  -->
+    <br>
+    <button onclick="Toggle('prime_method_3')">Method 3</button>
+    <div id="prime_method_3" class="methods">
+
+        <p class="text">In method 2 we ran the loop for all n/2 numbers..let's see if we can optimize it further.</p>
+        <p class="text">Mathematically, it is proven that checking only upto &Sqrt; n is enough to check if a number is prime or not. Therefore we don't have to run the loop for all n/2 numbers. Thus optimising the algorithm further.</p>
+
+        <!-- Pseudo code -->
+        <h2 class="side_heading">Pseudo code : </h2>
+        <pre class="text prettyprint">
+    IsPrime :
+        if n &lt; 2 :
+            return false
+        if n==2 :
+            return true
+        for i = 3 to &Sqrt;n :
+            if n is divisible by i :
+                return false
+        return true
+    </pre>
+
+
+        <!-- code -->
+        <h2 class="side_heading">Code : </h2>
+        <pre class="prettyprint">
+    // code to check if a given number is prime
+    // algorithm
+    // complexity O(sqrt(n))
+    // compile: gcc prime3.c -lm
+    
+    #include &lt;stdio.h&gt;
+    #include &lt;stdbool.h&gt;
+    #include &lt;math.h&gt;
+    
+    bool IsPrime(int n)
+    {
+        if (n &lt; 2)
+        {
+            return false;
+        }
+        else if (n == 2)
+        {
+            return true;
+        }
+    
+        for (int i = 2; i &lt;= sqrt(n); i++)
+        {
+            if (n % i == 0)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    int main()
+    {
+        int n;
+        printf("Enter a number: ");
+        scanf("%d", &n);
+        if (IsPrime(n))
+        {
+            printf("%d is a prime number\n", n);
+        }
+        else
+        {
+            printf("%d is not a prime number\n", n);
+        }
+    }
+    </pre>
+        <!-- Complexity Analysis -->
+        <h2 class="side_heading"> Complexity Analysis : </h2>
+        <p class="text">
+            we see that the algorithm has to go through &Sqrt;n steps if n is prime but has an upper bound of
+            O(&Sqrt;n).
+            Hence Time complexity is O(&Sqrt;n).
+        </p>
+
+    </div>
+
+
+    <!-- Problems -->
+    <h2 class="side_heading"> Problems : </h2>
+
+    <!-- problem 1 -->
+    <button onclick="Toggle('prime_problem_1')">Problem 1</button>
+    <div id="prime_problem_1" class="text methods">Print all primes less than n . <br>
+
+        <button onclick="Toggle('prime_solution_1')">Solution</button>
+        <div id="prime_solution_1" class="text methods">Comming soon.... </div>
+    </div>
+
+
+    <!-- problem 2 -->
+
+</body>
+
+</html>

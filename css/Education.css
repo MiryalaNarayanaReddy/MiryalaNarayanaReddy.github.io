@@ -1,0 +1,46 @@
+body {
+  background-image: url("../img/background_images/evening.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 1000px;
+}
+
+.my_info {
+  padding: 10px;
+  font-size: large;
+}
+
+#text{
+  padding-top: 20px;
+
+}
+
+.blocktype {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 76px;
+  margin-left: 125px;
+}
+
+.my_info a {
+  text-decoration: none;
+  font-size: 2rem;
+  color: white;
+}
+
+.my_info a:hover {
+  text-decoration: none;
+  font-size: 2rem;
+  color: rgb(252, 0, 0);
+}
+
+/* ipad pro*/
+
+@media screen and (min-width: 768px) and (max-width: 1200px) {
+  body {
+    background-image: url("../img/background_images/evening.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 1500px;
+  }
+}

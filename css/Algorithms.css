@@ -1,0 +1,18 @@
+body {
+  background-image: url("https://images.unsplash.com/photo-1475274047050-1d0c0975c63e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=752&q=80");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 1000px;
+  background-color: black;
+  opacity: 1;
+}
+
+h1{
+  font-size: 20px;
+  color: white;
+  padding: 10px;
+}
+a{
+  text-decoration: none;
+  
+}
