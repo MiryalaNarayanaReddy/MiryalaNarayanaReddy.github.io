@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- MathJax = {
+        options: {
+            //  HTML tags that won't be searched for math
+            skipHtmlTags: ['script', 'noscript', 'style', 'annotation', 'annotation-xml'],
+        },
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        svg: {
+            fontCache: 'global'
+        }
+    }; -->
+    <link rel="stylesheet" href="../../navigation_bar.css">
+    <link rel="stylesheet" href="../template.css">
+    <script src="../template.js"></script>
+    <script>
+        sessionStorage.setItem("page", "algorithm_list_8");
+        function goback() {
+            window.location.href = "../../html/classification.html"
+        }
+    </script>
+    <title>Jhonson</title>
+</head>
+
+<body>
+    <nav id="navbar">
+        <img src="../../../img/myimages/roundflower1.jpg" alt="">
+        <ul id="nav_item">
+            <li><a href="../../index.html" id="home">Home</a></li>
+            <li><a href="../../html/Algorithms.html" id="Algorithms">Importance of Algorithms</a></li>
+            <li><a href="../../html/classification.html" id="Algorithms">Important Algorithms</a></li>
+            <!-- <li><a href="Skills.html" id="Skills">Skills</a></li>
+            <li><a href="Contact.html" id="Contact"> Contact</a></li>
+            <li><a href="Education.html" id="Education">Education</a></li>
+            <li><a href="sitemap.html" id="Sitemap">Sitemap</a></li>
+            <li><a href="gallery.html" id="Gallery">Gallery</a></li> -->
+        </ul>
+
+        <!-- <h1 id="sideheading">
+          fibonacci numbers
+        </h1> -->
+    </nav>
+
+    <div class="second_nav">
+        <button class="button" id="b_introduction" onclick="Toggle('introduction')">Introduction</button>
+        <button class="button" id="b_method_1" onclick="Toggle('method_1')">Algorithm 1</button>
+        <!-- <button class="button" id="b_fibonacci_problem_1" onclick="Toggle('fibonacci_problem_1')">Problem 1</button> -->
+        <!-- <button class="button" id="b_resources" onclick="Toggle('resources')">Resources</button> -->
+    </div>
+
+    <div class="content">
+        <button class="backbutton" onclick="goback()">back</button>
+        <h1 class="heading">Jhonson</h1>
+        <div id="introduction">
+            <!-- introduction -->
+            <h2 class="side_heading">Introduction:</h2>
+            <p class="text">This algorithm gives shortest paths from every vertex to every other vertex using two algorithms <b> Bellman ford </b> and <b> Dijkstra's shortest path algorithm </b> </p>
+
+            <div class="methods">
+                <h2 class="side_heading">Problem Statement:</h2>
+
+                <p class="text">print the shortest paths from every vertex to every other vertex.</p>
+            </div>
+
+        </div>
+        <!-- Algorithm -->
+
+        <!-- Method 1:  -->
+
+        <div id="method_1" class="methods">
+            <h3 class="text"> Algorithm </h3>
+            <p class="text">1. Adding a dummy new node \(q\) with zero-weighted edges to all other vertices.</p>
+            <p class="text">2. Run \(bellman\_ford(G, q)\) and let the shortest paths be put in array \(h[\ ]\). Terminate if negative weighted cycle is detected.</p>
+            <p class="text">3. Change the weights of edges in original graph by adding \(h[u]-h[v]\) to \(weight(u, v)\) </p>
+            <p class="text">4. Remove vertex q and its edges with other vertices. </p>
+            <p class="text">5. Run dijkstra for every vertex to find shortest path from every vertex to every other vertex.(stored into a 2D |V|x|V| matrix) </p>
+            <p class="text">6. Add \(h[v]-h[u]\) to all path weights in 2D matrix. </p>
+
+            <!-- Pseudo code -->
+            <!-- <h2 class="side_heading">Pseudo code : </h2>
+            <pre class="text prettyprint">
+
+    </pre> -->
+
+            <!-- code -->
+            <h2 class="side_heading">Code : </h2>
+            <pre class="prettyprint">
+    // shortest path between every pair of vertices
+    // O(v^2logV + VE)
+    // uses both dijkstra and Bellman ford
+    
+    #include &lt;bits/stdc++.h&gt;
+    #include &lt;unistd.h&gt;
+    
+    using namespace std;
+    
+    #define adjacency_list map&lt;int, vector&lt;pair&lt;int, int&gt;&gt;&gt;
+    #define mp make_pair
+    #define INF INT_MAX
+    
+    typedef struct edge
+    {
+        int u;
+        int v;
+        int w;
+    } Edge;
+    
+    typedef struct graph
+    {
+        adjacency_list adj;
+    
+        int num_edges;
+        int num_vertices;
+        vector&lt;Edge&gt; edge;
+    } graph;
+    
+    bool bellmanford(graph G, int source, vector&lt;int&gt; &dist)
+    {
+        set&lt;int&gt; vertex_set;
+        for (int i = 0; i &lt; G.num_vertices; i++)
+        {
+            vertex_set.insert(i);
+        }
+        // cout &lt;&lt; "bell--\n";
+        // main part of algorithm
+        dist[source] = 0;
+        for (int i = 0; i &lt; G.num_vertices - 1; i++)
+        {
+            for (int j = 0; j &lt; G.num_edges; j++)
+            {
+                int u = G.edge[j].u;
+                int v = G.edge[j].v;
+                int w = G.edge[j].w;
+    
+                if (dist[u] != INF && dist[u] + w &lt; dist[v])
+                {
+                    dist[v] = dist[u] + w;
+                }
+            }
+        }
+        // for (int i = 0; i &lt; G.num_vertices; i++)
+        // {
+        //     cout &lt;&lt; dist[i] &lt;&lt; "\n";
+        // }
+        // cout &lt;&lt; "bell--\n";
+        //// cycle detection
+        for (int j = 0; j &lt; G.num_edges; j++)
+        {
+            int u = G.edge[j].u;
+            int v = G.edge[j].v;
+            int w = G.edge[j].w;
+    
+            if (dist[u] != INF && dist[u] + w &lt; dist[v])
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    void dijkstra(graph G, int dist[], int source)
+    {
+        set&lt;int&gt; vertex_set;
+        for (int i = 0; i &lt; G.num_vertices; i++)
+        {
+            vertex_set.insert(i);
+        }
+    
+        dist[source] = 0;
+        while (!vertex_set.empty())
+        {
+            int u = *(vertex_set.begin()); //  if these two lines are not initialised then we may end up looping on single vertex
+            int min_dist = dist[u];
+            for (auto i : vertex_set)
+            {
+                if (dist[i] &lt; min_dist)
+                {
+                    u = i;
+                    min_dist = dist[i];
+                }
+            }
+            vertex_set.erase(u);
+            // u has vertex with min distance from source
+            // terminate dijkstra if you want min ditance to this vertex.
+    
+            for (auto e : G.edge)
+            {
+                if (e.u == u)
+                {
+                    if (dist[e.u] != INF && dist[e.u] + e.w &lt; dist[e.v])
+                    {
+                        dist[e.v] = dist[e.u] + e.w;
+                    }
+                }
+            }
+            // for (auto i : G.adj[u])
+            // {
+            //     int v = i.first;
+            //     int new_dist = dist[u] + i.second;
+            //     if (new_dist &lt; dist[v])
+            //     {
+            //         dist[v] = new_dist;
+            //     }
+            // }
+            // cout &lt;&lt; u &lt;&lt; "\n";
+            // sleep(1);
+        }
+        // for (int i = 0; i &lt; G.num_vertices; i++)
+        // {
+        //     cout &lt;&lt; dist[i] &lt;&lt; " ";
+        // }
+        // cout &lt;&lt; "\n";
+    }
+    
+    void johnson(graph G)
+    {
+        // creating a new graph with new node q connected all other nodes wih 0 weighted edge
+    
+        int new_node = G.num_vertices;
+        int orignal_num_edges = G.num_edges;
+        G.num_edges += G.num_vertices;
+        G.num_vertices++;
+    
+        for (int i = orignal_num_edges; i &lt; G.num_edges; i++)
+        {
+            G.edge.push_back(Edge{new_node, i - orignal_num_edges, 0});
+        }
+    
+        // for (auto i : G.edge)
+        // {
+        //     cout &lt;&lt; i.u &lt;&lt; " " &lt;&lt; i.v &lt;&lt; " " &lt;&lt; i.w &lt;&lt; "\n";
+        // }
+    
+        // bellman ford part of algorithm
+        // cout &lt;&lt; "bellman ford--\n";
+        vector&lt;int&gt; h(G.num_vertices, INF);
+        if (!bellmanford(G, new_node, h))
+        {
+            cout &lt;&lt; "negative edge cycle detected...\nexiting....\n";
+            return;
+        }
+        // reweighing the edges
+        // cout &lt;&lt; "reweighting edges--\n";
+        for (int i = 0; i &lt; orignal_num_edges; i++)
+        {
+            G.edge[i].w += h[G.edge[i].u] - h[G.edge[i].v];
+        }
+        // remove new_edge
+        // cout &lt;&lt; "removing edges--\n";
+        G.num_vertices--;
+        G.num_edges = orignal_num_edges;
+    
+        // for (auto i : G.edge)
+        // {
+        //     cout &lt;&lt; i.u &lt;&lt; " " &lt;&lt; i.v &lt;&lt; " " &lt;&lt; i.w &lt;&lt; "\n";
+        // }
+    
+        for (int i = 0; i &lt; G.num_vertices; i++)
+        {
+            G.edge.pop_back();
+        }
+    
+        // dijkstra
+        // cout &lt;&lt; "removed edges\n";
+        // for (auto i : G.edge)
+        // {
+        //     cout &lt;&lt; i.u &lt;&lt; " " &lt;&lt; i.v &lt;&lt; " " &lt;&lt; i.w &lt;&lt; "\n";
+        // }
+    
+        // cout &lt;&lt; "dijkstra--\n";
+        int dist[G.num_vertices][G.num_vertices];
+        for (int i = 0; i &lt; G.num_vertices; i++)
+        {
+            for (int j = 0; j &lt; G.num_vertices; j++)
+            {
+                dist[i][j] = INF;
+            }
+        }
+    
+        for (int i = 0; i &lt; G.num_vertices; i++)
+        {
+            dijkstra(G, &dist[i][0], i);
+            // cout &lt;&lt; "i = " &lt;&lt; i &lt;&lt; "\n--------------------\n";
+        }
+    
+        for (int i = 0; i &lt; G.num_vertices; i++)
+        {
+            for (int j = 0; j &lt; G.num_vertices; j++)
+            {
+                dist[i][j] += h[j] - h[i];
+            }
+        }
+    
+        for (int i = 0; i &lt; G.num_vertices; i++)
+        {
+            for (int j = 0; j &lt; G.num_vertices; j++)
+            {
+                if (dist[i][j] == INF)
+                {
+                    cout &lt;&lt; "INF  ";
+                }
+                else
+                {
+                    printf("%-4d ", dist[i][j]);
+                }
+            }
+            cout &lt;&lt; "\n";
+        }
+    }
+    
+    int main()
+    {
+        // undirected graph
+    
+        graph G; // u - {{v1,w1}, {v2, w2}, .... {vk,wk}}
+        cin &gt;&gt; G.num_vertices;
+        cin &gt;&gt; G.num_edges;
+        int u, v, w;
+        for (int i = 0; i &lt; G.num_edges; i++)
+        {
+            cin &gt;&gt; u &gt;&gt; v &gt;&gt; w;
+            G.edge.push_back(Edge{u, v, w});
+        }
+        johnson(G);
+        // cout &lt;&lt; "\n";
+    }
+                   
+    </pre>
+            <!-- Complexity Analysis -->
+            <h2 class="side_heading"> Complexity Analysis : </h2>
+            <p class="text">Time complexity : \(O(|V|.|E| + |V|(dijkstra\_complexity))\) </p>
+            <p class="text">Time complexity (normal dijkstra without min-heaps or fibonacci heaps): \(O(|V|.|E| + |V|^3)\) &approx; \(O(|V|^3)\) </p>
+            <p class="text">Time complexity ( dijkstra with min-heaps or fibonacci heaps): \(O(|V|.|E| + |V|^2log|V|)\) which is better than Floyd warshall. </p>
+
+          
+        </div>
+
+        <div id="resources" class="methods">
+
+            <h2>
+                video resources
+            </h2>
+
+            <h2>
+                web resources
+            </h2>
+<p class="text"><a href="https://en.wikipedia.org/wiki/Johnson%27s_algorithm" style="text-decoration: none;">Jhonson wikipedia</a></p>
+            <h2>
+                book resources
+            </h2>
+
+        </div>
+
+
+    </div>
+</body>
+<script>
+    MathJax = {
+        options: {
+            //  HTML tags that won't be searched for math
+            skipHtmlTags: ['script', 'noscript', 'style', 'annotation', 'annotation-xml'],
+        },
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        svg: {
+            fontCache: 'global'
+        }
+    };
+
+</script>
+
+</html>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- MathJax = {
+        options: {
+            //  HTML tags that won't be searched for math
+            skipHtmlTags: ['script', 'noscript', 'style', 'annotation', 'annotation-xml'],
+        },
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        svg: {
+            fontCache: 'global'
+        }
+    }; -->
+    <link rel="stylesheet" href="../../navigation_bar.css">
+    <link rel="stylesheet" href="../template.css">
+    <script src="../template.js"></script>
+    <script>
+        sessionStorage.setItem("page", "algorithm_list_3");
+        function goback() {
+            window.location.href = "../../html/classification.html"
+        }
+    </script>
+    <title>Bucket sort</title>
+</head>
+
+<body>
+    <nav id="navbar">
+        <img src="../../../img/myimages/roundflower1.jpg" alt="">
+        <ul id="nav_item">
+            <li><a href="../../index.html" id="home">Home</a></li>
+            <li><a href="../../html/Algorithms.html" id="Algorithms">Importance of Algorithms</a></li>
+            <li><a href="../../html/classification.html" id="Algorithms">Important Algorithms</a></li>
+            <!-- <li><a href="Skills.html" id="Skills">Skills</a></li>
+            <li><a href="Contact.html" id="Contact"> Contact</a></li>
+            <li><a href="Education.html" id="Education">Education</a></li>
+            <li><a href="sitemap.html" id="Sitemap">Sitemap</a></li>
+            <li><a href="gallery.html" id="Gallery">Gallery</a></li> -->
+        </ul>
+
+        <!-- <h1 id="sideheading">
+          fibonacci numbers
+        </h1> -->
+    </nav>
+
+    <div class="second_nav">
+        <button class="button" id="b_introduction" onclick="Toggle('introduction')">Introduction</button>
+        <button class="button" id="b_method_1" onclick="Toggle('method_1')">Algorithm 1</button>
+        <!-- <button class="button" id="b_fibonacci_problem_1" onclick="Toggle('fibonacci_problem_1')">Problem 1</button> -->
+        <!-- <button class="button" id="b_resources" onclick="Toggle('resources')">Resources</button> -->
+    </div>
+
+    <div class="content">
+        <button class="backbutton" onclick="goback()">back</button>
+        <h1 class="heading">Bucket sort</h1>
+        <div id="introduction">
+            <!-- introduction -->
+            <h2 class="side_heading">Introduction:</h2>
+            <p class="text"> This is a hashing based algorithm using hash table ( or map in c++ ) data structure. </p>
+            <p class="text">
+                This method is used if there are many nearby decimal numbers are to be sorted. 
+            </p>
+            <div class="methods">
+                <h2 class="side_heading">Problem Statement:</h2>
+
+                <p class="text">Sort an array of n integers</p>
+            </div>
+
+        </div>
+        <!-- Algorithm -->
+
+        <!-- Method 1:  -->
+
+        <div id="method_1" class="methods">
+            <h3 class="text"> Algorithm </h3>
+            <p class="text">1. we have an array of n numbers.</p>
+            <p class="text">2. we create k buckets into which we drop then number from the array. </p>
+            <p class="text">3. put number \(a[i]\) into bucket \( \frac{a[i]-min}{k}\)  </p>
+            <p class="text">4. sort each bucket.</p>
+            <p class="text">5. merge all buckets into result array</p>
+
+            <!-- Pseudo code -->
+            <h2 class="side_heading">Pseudo code : </h2>
+            <pre class="text prettyprint">
+
+    </pre>
+
+            <!-- code -->
+            <h2 class="side_heading">Code : </h2>
+            <pre class="prettyprint">
+    // this is counting sort for all kinds of rationals
+    // mixture of couting and merge sort.
+    #include &lt;bits/stdc++.h&gt;
+    using namespace std;
+    
+    void bucket_sort(float a[], int n, int k)
+    {
+        // find range by finding min and max
+        float max = 0, min = FLT_MAX;
+        for (int i = 0; i &lt; n; i++)
+        {
+            if (max &lt; a[i])
+            {
+                max = a[i];
+            }
+            if (min &gt; a[i])
+            {
+                min = a[i];
+            }
+        }
+    
+        float range = (max - min) / k;
+    
+        if (min == max) // all elements are equal
+        {
+            return;
+        }
+    
+        // filling buckets
+        vector&lt;vector&lt;float&gt;&gt; bucket(k);
+        for (int i = 0; i &lt; n; i++)
+        {
+            cout &lt;&lt; "key = " &lt;&lt; floor((a[i] - min) / range) &lt;&lt; "\nvalue = " &lt;&lt; a[i] &lt;&lt; "\n";
+            int key = floor((a[i] - min) / range);
+    
+            bucket[key % k].push_back(a[i]);
+        }
+    
+        // sorting each bucket
+        for (int i = 0; i &lt; k; i++)
+        {
+            sort(bucket[i].begin(), bucket[i].end());
+        }
+    
+        // copying e=result into array
+        int cnt = 0;
+        for (int i = 0; i &lt; k; i++)
+        {
+            for (auto j : bucket[i])
+            {
+                a[cnt] = j;
+                cnt++;
+            }
+        }
+    }
+    
+    int main()
+    {
+        int n, k;
+        cout &lt;&lt; "Enter n: ";
+        cin &gt;&gt; n;
+        float a[n];
+        for (int i = 0; i &lt; n; i++)
+        {
+            cin &gt;&gt; a[i];
+        }
+        cout &lt;&lt; "Enter number of buckets: ";
+        cin &gt;&gt; k;
+        bucket_sort(a, n, k);
+        for (int i = 0; i &lt; n; i++)
+        {
+            cout &lt;&lt; a[i] &lt;&lt; " ";
+        }
+        printf("\n");
+    }
+    </pre>
+            <!-- Complexity Analysis -->
+            <h2 class="side_heading"> Complexity Analysis : </h2>
+            <p class="text"> Time Complexity : \(O(n+k)\) </p>
+            <p class="text"> Worst case : \(O(n^2)\) when almost all elements are supper close and only one bucket is supper full whereas other have very few elements.</p>
+    
+        </div>
+
+        <div id="resources" class="methods">
+
+            <h2>
+                video resources
+            </h2>
+
+            <h2>
+                web resources
+            </h2>
+            <p class="text"><a href="https://medium.com/karuna-sehgal/an-introduction-to-bucket-sort-62aa5325d124">Explaination with images.</a></p>
+            <p class="text"><a href="https://en.wikipedia.org/wiki/Bucket_sort">Complexity Analysis</a></p>
+            <h2>
+                book resources
+            </h2>
+
+        </div>
+
+
+    </div>
+</body>
+<script>
+    MathJax = {
+        options: {
+            //  HTML tags that won't be searched for math
+            skipHtmlTags: ['script', 'noscript', 'style', 'annotation', 'annotation-xml'],
+        },
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        svg: {
+            fontCache: 'global'
+        }
+    };
+
+</script>
+
+</html>

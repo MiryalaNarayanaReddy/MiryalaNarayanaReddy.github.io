@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- MathJax = {
+        options: {
+            //  HTML tags that won't be searched for math
+            skipHtmlTags: ['script', 'noscript', 'style', 'annotation', 'annotation-xml'],
+        },
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        svg: {
+            fontCache: 'global'
+        }
+    }; -->
+    <link rel="stylesheet" href="../../navigation_bar.css">
+    <link rel="stylesheet" href="../template.css">
+    <script src="../template.js"></script>
+    <script>
+        sessionStorage.setItem("page", "algorithm_list_3");
+        function goback() {
+            window.location.href = "../../html/classification.html"
+        }
+    </script>
+    <title>Heap sort</title>
+</head>
+
+<body>
+    <nav id="navbar">
+        <img src="../../../img/myimages/roundflower1.jpg" alt="">
+        <ul id="nav_item">
+            <li><a href="../../index.html" id="home">Home</a></li>
+            <li><a href="../../html/Algorithms.html" id="Algorithms">Importance of Algorithms</a></li>
+            <li><a href="../../html/classification.html" id="Algorithms">Important Algorithms</a></li>
+            <!-- <li><a href="Skills.html" id="Skills">Skills</a></li>
+            <li><a href="Contact.html" id="Contact"> Contact</a></li>
+            <li><a href="Education.html" id="Education">Education</a></li>
+            <li><a href="sitemap.html" id="Sitemap">Sitemap</a></li>
+            <li><a href="gallery.html" id="Gallery">Gallery</a></li> -->
+        </ul>
+
+        <!-- <h1 id="sideheading">
+          fibonacci numbers
+        </h1> -->
+    </nav>
+
+    <div class="second_nav">
+        <button class="button" id="b_introduction" onclick="Toggle('introduction')">Introduction</button>
+        <button class="button" id="b_method_1" onclick="Toggle('method_1')">Algorithm 1</button>
+        <!-- <button class="button" id="b_fibonacci_problem_1" onclick="Toggle('fibonacci_problem_1')">Problem 1</button> -->
+        <!-- <button class="button" id="b_resources" onclick="Toggle('resources')">Resources</button> -->
+    </div>
+
+    <div class="content">
+        <button class="backbutton" onclick="goback()">back</button>
+        <h1 class="heading">Heap sort</h1>
+        <div id="introduction">
+            <!-- introduction -->
+            <h2 class="side_heading">Introduction:</h2>
+        <p class="text">This is a <b> comparison based </b> sorting algorithm which makes use of heap concept using arrays and max-heapify operation on elements of array. This algorithm is better understood when you visualize it through binary trees ( showing heap structure )..</p>
+
+            <div class="methods">
+                <h2 class="side_heading">Problem Statement:</h2>
+
+                <p class="text">Sort an array of n integers</p>
+            </div>
+
+        </div>
+        <!-- Algorithm -->
+
+        <!-- Method 1:  -->
+
+        <div id="method_1" class="methods">
+            <h3 class="text"> Algorithm </h3>
+            <p class="text"> 1. First step is to make a heap of numbers from the array such that every element is bigger
+                than all the elements below it in the heap </p>
+            <p class="text">2. Looking at this we can see that top one is the largest. replace it with an element at the
+                bottom of the heap and put it at the end of the array. Then decrease the array size by one</p>
+            <p class="text">3. Now just recursively push the top element if there is a larger element as its children in
+                the next row of the heap.Do this till we reach leaf (bottom) . This is called max heapifying of top
+                element. </p>
+            <p class="text"> 4. Repeat steps 2 and 3 till heap is empty and we get the sorted array. </p>
+            <!-- Pseudo code -->
+            <h2 class="side_heading">Pseudo code : </h2>
+            <pre class="text prettyprint">
+heap_sort(a[],  n):
+    heap_size = n-1
+    for i = heap_size/2 to 0
+        max_heapify(a, i , heap_size)
+    
+    for i = n-1 to 0
+        swap(a[i], a[0])
+        heap_size --
+        max_heapify(a,0,heap_size) // puts max element at the end
+
+    
+max_heapify(a, index, heap_size):	
+    left = 2*index
+    right = left+1
+    largest = index
+    if left &lt;= heap_size and a[left] &gt; a[largest]:
+        largest = left
+    if right &lt;= heap_size and a[right] &gt; a[largest]:
+        largest = right
+    if largest != index : // it means a[index] is not the largest
+        swap(a[largest],a[index])
+        max_heapify(a, largest,heap_size)
+    </pre>
+
+            <!-- code -->
+            <h2 class="side_heading">Code : </h2>
+            <pre class="prettyprint">
+    #include &lt;bits/stdc++.h&gt;
+    using namespace std;
+    
+    #define Parent(i) i &gt;&gt; 1      // i/2
+    #define Left(i) i &lt;&lt; 1        // 2*i
+    #define Right(i) (i &lt;&lt; 1) + 1 // 2*i+1
+    
+    void max_heapify(int a[], int index, int heap_size)
+    {
+        int left = Left(index);   //left child
+        int right = Right(index); // right child
+        int largest = index;
+        if (left &lt;= heap_size && a[left] &gt; a[largest]) // compare a[left] & a[largest]
+        {
+            largest = left;
+        }
+        if (right &lt;= heap_size && a[right] &gt; a[largest]) // compare a[right] & a[largest]
+        {
+            largest = right;
+        }
+        if (largest != index) // 'index' is not 'largest'
+        {
+            swap(a[largest], a[index]);
+            max_heapify(a, largest, heap_size); // heapify the child with which swap occurred.
+        }
+        //index element is largest hence it satisfies heap property.
+    }
+    
+    void build_max_heap(int a[], int heap_size)
+    {
+        for (int i = (heap_size / 2); i &gt;= 0; i--) // a[(heap_size/2)+1....heap_size] are leaf nodes
+        {
+            max_heapify(a, i, heap_size);
+        }
+    }
+    
+    void heap_sort(int a[], int n)
+    {
+    
+        int heap_size = n - 1;        //last element index
+        build_max_heap(a, heap_size); // building max heap --&gt;  a[i] &gt;= Left(i) & a[i] &gt;= Right[i]
+        // parent is greater than equal to its children.
+    
+        for (int i = n - 1; i &gt; 0; i--)
+        {
+            swap(a[i], a[0]);             // swap last element(a[i]) with maximum element(a[0])
+            heap_size--;                  // like linear sort where max goes to end and we decrease size by 1. here we get max in O(1) time
+            max_heapify(a, 0, heap_size); // a[0] may not satisfy heap property so heapify it. O(log heap_size)
+        }
+    }
+    
+    int main()
+    {
+        int n;
+        cout &lt;&lt; "Enter n: ";
+        cin &gt;&gt; n;
+        int a[n];
+        for (int i = 0; i &lt; n; i++)
+        {
+            cin &gt;&gt; a[i];
+        }
+        heap_sort(a, n);
+        for (int i = 0; i &lt; n; i++)
+        {
+            cout &lt;&lt; a[i] &lt;&lt; " ";
+        }
+        printf("\n");
+    }    
+    </pre>
+            <!-- Complexity Analysis -->
+            <h2 class="side_heading"> Complexity Analysis : </h2>
+            <p class="text">Time complexity is \(O(nlogn)\) </p>
+            <p class="text"> since heap is a binary tree having height of 
+                \(logn\). So max-heapify takes \(O(logn)\) time </p>
+            <p class="text">
+                We do max-heapify n times. Hence complexity is \(O(nlogn)\). 
+            </p>
+        </div>
+
+        <div id="resources" class="methods">
+
+            <h2>
+                video resources
+            </h2>
+
+            <h2>
+                web resources
+            </h2>
+
+            <h2>
+                book resources
+            </h2>
+
+        </div>
+
+
+    </div>
+</body>
+<script>
+    MathJax = {
+        options: {
+            //  HTML tags that won't be searched for math
+            skipHtmlTags: ['script', 'noscript', 'style', 'annotation', 'annotation-xml'],
+        },
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        svg: {
+            fontCache: 'global'
+        }
+    };
+
+</script>
+
+</html>

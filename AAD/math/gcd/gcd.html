@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+
+    <link rel="stylesheet" href="../../../navigation_bar.css">
+    <link rel="stylesheet" href="../../template.css">
+    <script src="../../template.js"></script>
+    <script src="gcd.js"></script>
+    <script>
+        sessionStorage.setItem("page", "algorithm_list_1");
+        function goback() {
+            window.location.href = "../../../html/classification.html"
+        }
+    </script>
+    <title>gcd</title>
+</head>
+
+<body>
+    <nav id="navbar">
+        <img src="../../../img/myimages/roundflower1.jpg" alt="">
+        <ul id="nav_item">
+            <li><a href="../../../index.html" id="home">Home</a></li>
+            <li><a href="../../../html/Algorithms.html" id="Algorithms">Importance of Algorithms</a></li>
+            <li><a href="../../../html/classification.html" id="Algorithms">Important Algorithms</a></li>
+            <!-- <li><a href="Skills.html" id="Skills" >Skills</a></li>
+            <li><a href="Contact.html" id="Contact" > Contact</a></li>
+            <li><a href="Education.html" id="Education" >Education</a></li>
+            <li><a href="sitemap.html" id="Sitemap" >Sitemap</a></li>
+            <li><a href="gallery.html" id="Gallery" >Gallery</a></li> -->
+        </ul>
+
+        <!-- <h1 id="sideheading">
+          gcd numbers
+        </h1> -->
+    </nav>
+
+    <div class="second_nav">
+        <button class="button" id="b_introduction" onclick="Toggle('introduction')">Introduction</button>
+        <button class="button" id="b_gcd_method_1" onclick="Toggle('gcd_method_1')">Algorithm 1</button>
+        <button class="button" id="b_gcd_method_2" onclick="Toggle('gcd_method_2')">Algorithm 2</button>
+    </div>
+    <div class="content">
+        <button class="backbutton" onclick="goback()">back</button>
+        <h1 class="heading">Greatest Common Divisor</h1>
+        <!-- Introduction -->
+        <div id="introduction">
+
+            <h2 class="side_heading">Introduction :</h2>
+
+            <span class="definition"> Greatest common Divisor ( GCD )</span>
+            <span class="text">of two numbers a and b is the largest number that divides both a and b .</span>
+            <p class="text"> Example: </p>
+            <p class="text"> gcd of 4 and 6 is 2 </p>
+            <p class="text"> gcd of 24 and 18 is 6 </p>
+            <div class="methods">
+
+
+                <h2 class="side_heading">Problem Statement :</h2>
+                <p class="text">Find gcd of a and b where a &ge; b and a, b &in; N .</p>
+            </div>
+        </div>
+        <!-- Algorithm -->
+
+        <!-- Method 1:  -->
+        <div id="gcd_method_1" class="methods">
+            <h3 class="text">Algorithm 1: Naive Algorithm</h3>
+            <p class="text">we are given two numbers a and b. a &ge; b </p>
+            <p class="text">we take numbers from 1 to b including 1 and b and select biggest number that divides a and
+                b.
+            </p>
+
+            <!-- Pseudo code -->
+            <h2 class="side_heading">Pseudo code : </h2>
+            <pre class="text prettyprint">
+    gcd(a, b):
+        result = 1
+        for i = 1 to b:
+            if a%i ==0 and b%i == 0:
+                  result = i
+        return result      
+    </pre>
+
+            <!-- code -->
+            <h2 class="side_heading">Code : </h2>
+            <pre class="prettyprint">
+    // finding gcd naive method
+    // complexity O(n)
+    #include &lt;stdio.h&gt;
+    
+    int gcd(int a, int b)
+    {
+        int res = 1;
+        for (int i = 1; i &lt;= b; i++)
+        {
+            if (a % i == 0 && b % i == 0)
+            {
+                res = i;
+            }
+        }
+        return res;
+    }
+    
+    int main()
+    {
+        int a, b;
+        printf("Enter a: ");
+        scanf("%d", &a);
+        printf("Enter b: ");
+        scanf("%d", &b);
+    
+        printf("GCD of %d and %d is %d\n", a, b, gcd(a, b));
+    }
+    </pre>
+            <!-- Complexity Analysis -->
+            <h2 class="side_heading"> Complexity Analysis : </h2>
+            <p class="text">
+                we see that the algorithm has to go through b steps.
+                Hence Time complexity is O(b).
+            </p>
+
+        </div>
+
+        <!-- Method 2:  -->
+        <div id="gcd_method_2" class="methods">
+            <h3 class="text">Euclid's Algorithm for finding GCD </h3>
+            <p class="text">Here we take a and b and calculate the remainder a%b. </p>
+            <p class="text">Taking b as a and this remainder a%b as b , we repeat the above and this step until b
+                becomes 0
+                when we say a is the gcd. </p>
+
+            <!-- Pseudo code -->
+            <h2 class="side_heading">Pseudo code : </h2>
+            <pre class="text prettyprint">
+    gcd (a, b) :
+        if b == 0:
+            return a
+        else:
+            return gcd(b, a%b)
+    </pre>
+
+            <!-- code -->
+            <h2 class="side_heading">Code : </h2>
+            <pre class="prettyprint">
+    // Euclid's Algorithm for gcd
+    #include &lt;stdio.h&gt;
+    
+    int gcd(int a, int b)
+    {
+        if (b == 0)
+        {
+            return a;
+        }
+    
+        return gcd(b, a % b);
+    }
+    
+    int main()
+    {
+        int a, b;
+        printf("Enter a: ");
+        scanf("%d", &a);
+        printf("Enter b: ");
+        scanf("%d", &b);
+    
+        printf("GCD of %d and %d is %d\n", a, b, gcd(a, b));
+    }
+    </pre>
+            <!-- Complexity Analysis -->
+            <h2 class="side_heading"> Complexity Analysis : </h2>
+            <p class="text">
+                Time complexity is O(n) and this is the best known algorithm for finding gcd.
+            </p>
+
+        </div>
+
+    </div>
+</body>
+
+</html>

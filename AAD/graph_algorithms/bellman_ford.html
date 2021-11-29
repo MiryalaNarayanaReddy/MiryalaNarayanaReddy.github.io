@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- MathJax = {
+        options: {
+            //  HTML tags that won't be searched for math
+            skipHtmlTags: ['script', 'noscript', 'style', 'annotation', 'annotation-xml'],
+        },
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        svg: {
+            fontCache: 'global'
+        }
+    }; -->
+    <link rel="stylesheet" href="../../navigation_bar.css">
+    <link rel="stylesheet" href="../template.css">
+    <script src="../template.js"></script>
+    <script>
+        sessionStorage.setItem("page", "algorithm_list_8");
+        function goback() {
+            window.location.href = "../../html/classification.html"
+        }
+    </script>
+    <title>Bellman Ford</title>
+</head>
+
+<body>
+    <nav id="navbar">
+        <img src="../../../img/myimages/roundflower1.jpg" alt="">
+        <ul id="nav_item">
+            <li><a href="../../index.html" id="home">Home</a></li>
+            <li><a href="../../html/Algorithms.html" id="Algorithms">Importance of Algorithms</a></li>
+            <li><a href="../../html/classification.html" id="Algorithms">Important Algorithms</a></li>
+            <!-- <li><a href="Skills.html" id="Skills">Skills</a></li>
+            <li><a href="Contact.html" id="Contact"> Contact</a></li>
+            <li><a href="Education.html" id="Education">Education</a></li>
+            <li><a href="sitemap.html" id="Sitemap">Sitemap</a></li>
+            <li><a href="gallery.html" id="Gallery">Gallery</a></li> -->
+        </ul>
+
+        <!-- <h1 id="sideheading">
+          fibonacci numbers
+        </h1> -->
+    </nav>
+
+    <div class="second_nav">
+        <button class="button" id="b_introduction" onclick="Toggle('introduction')">Introduction</button>
+        <button class="button" id="b_method_1" onclick="Toggle('method_1')">Algorithm 1</button>
+        <!-- <button class="button" id="b_fibonacci_problem_1" onclick="Toggle('fibonacci_problem_1')">Problem 1</button> -->
+        <!-- <button class="button" id="b_resources" onclick="Toggle('resources')">Resources</button> -->
+    </div>
+
+    <div class="content">
+        <button class="backbutton" onclick="goback()">back</button>
+        <h1 class="heading">Bellman Ford</h1>
+        <div id="introduction">
+            <!-- introduction -->
+            <h2 class="side_heading">Introduction:</h2>
+            <p class="text"> This is a single source shortest path Algorithm where there is a single source from which
+                we want to find shortest path to a node or to all other nodes. Negative edges are allowed in the
+                graph.This method is also used in negative weighted cycle detection in graphs.</p>
+
+            <div class="methods">
+                <h2 class="side_heading">Problem Statement:</h2>
+
+                <p class="text">find the shortest paths to all nodes from a start node.</p>
+            </div>
+
+        </div>
+        <!-- Algorithm -->
+
+        <!-- Method 1:  -->
+
+        <div id="method_1" class="methods">
+            <h3 class="text"> Algorithm </h3>
+            <p class="text">1. A graph \(G(V, E)\) and start vertex \(s\) are given.</p>
+            <p class="text">2. we have two arrays \(dist[\ ]\) initialized to \(\infty\) and \(prev[\ ]\) initilaized to
+                -1 for all vertices</p>
+            <p class="text">3. Relax all egdes ie., \(dist[v]\) .</p>
+            <p class="text">4. Repeat above step \(|V|-1 \) times</p>
+            <p class="text">5. Finally check step 3 again to see if there is any relaxation then there is a negative weighted cycle in the
+                graph or else we get our shortest paths to all vertices from \(prev[\ ]\) and \(dist[\ ]\) </p>
+
+            <!-- Pseudo code -->
+            <h2 class="side_heading">Pseudo code : </h2>
+            <pre class="text prettyprint">
+BellmanFord( G, s ):
+    dist[G.num_vertices] := INFINITY
+    prev[G.num_vertices] := -1
+    dist[s] := 0
+
+    repeat G.num_vertices - 1 times:
+        repeat G.num_edges times:
+            if dist[u] + w &lt; dist[v]
+            prev[v] = u
+   
+    </pre>
+
+            <!-- code -->
+            <h2 class="side_heading">Code : </h2>
+            <pre class="prettyprint">
+    // single source shortest path negative edges allowed
+    #include &lt;bits/stdc++.h&gt;
+    using namespace std;
+    
+    #define adjacency_list map&lt;int, vector&lt;pair&lt;int, int&gt;&gt;&gt;
+    #define mp make_pair
+    #define INF INT_MAX
+    
+    typedef struct edge
+    {
+        int u;
+        int v;
+        int w;
+    } Edge;
+    
+    typedef struct graph
+    {
+        adjacency_list adj;
+    
+        int num_edges;
+        int num_vertices;
+        Edge *edge;
+    } graph;
+    
+    void bellmanford(graph G, int source)
+    {
+        vector&lt;int&gt; dist(G.num_vertices, INF);
+        vector&lt;int&gt; prev(G.num_vertices, -1);
+    
+        dist[source] = 0;
+        for (int i = 0; i &lt; G.num_vertices - 1; i++)
+        {
+            for (int j = 0; j &lt; G.num_edges; j++)
+            {
+    
+                int u = G.edge[j].u;
+                int v = G.edge[j].v;
+                int w = G.edge[j].w;
+    
+                if (dist[u] != INF && dist[u] + w &lt; dist[v])
+                {
+                    dist[v] = dist[u] + w;
+                    prev[v] = u;
+                }
+            }
+        }
+    
+        cout &lt;&lt; "vertex prev dist\n";
+    
+        for (int i = 0; i &lt; G.num_vertices; i++)
+        {
+            cout &lt;&lt; i &lt;&lt; " " &lt;&lt; prev[i] &lt;&lt; " " &lt;&lt; dist[i] &lt;&lt; "\n";
+        }
+        // cout &lt;&lt; "\n";
+    }
+    
+    int main()
+    {
+        // undirected graph
+    
+        graph G; // u - {{v1,w1}, {v2, w2}, .... {vk,wk}}
+        cin &gt;&gt; G.num_vertices;
+        cin &gt;&gt; G.num_edges;
+        G.edge = new Edge[G.num_edges];
+        int u, v, w;
+        for (int i = 0; i &lt; G.num_edges; i++)
+        {
+            cin &gt;&gt; G.edge[i].u &gt;&gt; G.edge[i].v &gt;&gt; G.edge[i].w;
+        }
+        int s;
+        cout &lt;&lt; "Enter start vertext for bellmanford : ";
+        cin &gt;&gt; s;
+    
+        bellmanford(G, s);
+        // cout &lt;&lt; "\n";
+    }
+                
+                
+    </pre>
+            <!-- Complexity Analysis -->
+            <h2 class="side_heading"> Complexity Analysis : </h2>
+            <p class="text"> Time Complexity : \(O(|V|.|E|)\)</p>
+        </div>
+
+        <div id="resources" class="methods">
+
+            <h2>
+                video resources
+            </h2>
+
+            <h2>
+                web resources
+            </h2>
+<p class="text"><a href="https://en.wikipedia.org/wiki/Bellman%E2%80%93Ford_algorithm" style="text-decoration: none;">Bellman Ford wikipedia</a></p>
+            <h2>
+                book resources
+            </h2>
+
+        </div>
+
+
+    </div>
+</body>
+<script>
+    MathJax = {
+        options: {
+            //  HTML tags that won't be searched for math
+            skipHtmlTags: ['script', 'noscript', 'style', 'annotation', 'annotation-xml'],
+        },
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        svg: {
+            fontCache: 'global'
+        }
+    };
+
+</script>
+
+</html>

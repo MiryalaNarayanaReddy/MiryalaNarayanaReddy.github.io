@@ -1,3 +1,7 @@
+#navbar {
+  background: url('');
+}
+
 body {
   background-image: url("../img/background_images/flower.jpg");
   background-repeat: no-repeat;

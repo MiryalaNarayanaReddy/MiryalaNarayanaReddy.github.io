@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- MathJax = {
+        options: {
+            //  HTML tags that won't be searched for math
+            skipHtmlTags: ['script', 'noscript', 'style', 'annotation', 'annotation-xml'],
+        },
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        svg: {
+            fontCache: 'global'
+        }
+    }; -->
+    <link rel="stylesheet" href="../../navigation_bar.css">
+    <link rel="stylesheet" href="../template.css">
+    <script src="../template.js"></script>
+    <script>
+        sessionStorage.setItem("page", "algorithm_list_8");
+        function goback() {
+            window.location.href = "../../html/classification.html"
+        }
+    </script>
+    <title>DFS</title>
+</head>
+
+<body>
+    <nav id="navbar">
+        <img src="../../../img/myimages/roundflower1.jpg" alt="">
+        <ul id="nav_item">
+            <li><a href="../../index.html" id="home">Home</a></li>
+            <li><a href="../../html/Algorithms.html" id="Algorithms">Importance of Algorithms</a></li>
+            <li><a href="../../html/classification.html" id="Algorithms">Important Algorithms</a></li>
+            <!-- <li><a href="Skills.html" id="Skills">Skills</a></li>
+            <li><a href="Contact.html" id="Contact"> Contact</a></li>
+            <li><a href="Education.html" id="Education">Education</a></li>
+            <li><a href="sitemap.html" id="Sitemap">Sitemap</a></li>
+            <li><a href="gallery.html" id="Gallery">Gallery</a></li> -->
+        </ul>
+
+        <!-- <h1 id="sideheading">
+          fibonacci numbers
+        </h1> -->
+    </nav>
+
+    <div class="second_nav">
+        <button class="button" id="b_introduction" onclick="Toggle('introduction')">Introduction</button>
+        <button class="button" id="b_method_1" onclick="Toggle('method_1')">Algorithm 1</button>
+        <!-- <button class="button" id="b_fibonacci_problem_1" onclick="Toggle('fibonacci_problem_1')">Problem 1</button> -->
+        <!-- <button class="button" id="b_resources" onclick="Toggle('resources')">Resources</button> -->
+    </div>
+
+    <div class="content">
+        <button class="backbutton" onclick="goback()">back</button>
+        <h1 class="heading">Depth First Search</h1>
+        <div id="introduction">
+            <!-- introduction -->
+            <h2 class="side_heading">Introduction:</h2>
+            <p class="text">This is one of the graph traversal algorithms. This is used in Topological sorting, kosaraju's algorithm. when graph is very big, dfs may suffer from non termination, so we can limit our traversal to certain depths only. </p>
+
+            <div class="methods">
+                <h2 class="side_heading">Problem Statement:</h2>
+
+                <p class="text">print the nodes of a graph G from start node such that the graph is traversed to is max possible depths before recursing back.</p>
+            </div>
+
+        </div>
+        <!-- Algorithm -->
+
+        <!-- Method 1:  -->
+
+        <div id="method_1" class="methods">
+            <h3 class="text"> Algorithm </h3>
+            <p class="text">1. A graph \(G(V, E)\) and start vertex \(s\) are given.</p>
+
+            <p class="text">2. We call dfs on start node . </p>
+            <p class="text">3. Mark start node as visited .  </p>
+            <p class="text">4. For each unvisited node in one step of start node call dfs on that node. </p>
+            <p class="text">5. All nodes reachable from start node will be printed. (Nodes that are not reachable from start node will not be printed in the above process..try to do it. ..) </p>
+            
+
+            <!-- Pseudo code -->
+            <h2 class="side_heading">Pseudo code : </h2>
+            <pre class="text prettyprint">
+visited[100] = {false};
+dfs( adjacency_list, start_vertex ):
+    visited[start_vertex] = true
+            print(start_vertex)
+    for v in adjacency_list[start_vertex]:
+        if !visited[v]:
+            dfs(adjacency_list, v)     // visit it
+    </pre>
+
+            <!-- code -->
+            <h2 class="side_heading">Code : </h2>
+            <pre class="prettyprint">
+    #include &lt;bits/stdc++.h&gt;
+    using namespace std;
+    
+    int visited[100] = {0};
+    
+    void dfs(map&lt;int, vector&lt;int&gt;&gt; &adj, int s)
+    {
+        visited[s] = 1;
+        cout &lt;&lt; s &lt;&lt; " ";
+        vector&lt;int&gt;::iterator itr;
+        for (auto u : adj[s])
+        {
+            if (!visited[u])
+            {
+                dfs(adj, u);
+            }
+        }
+    }
+    
+    int main()
+    {
+        int n;
+        cin &gt;&gt; n;
+    
+        map&lt;int, vector&lt;int&gt;&gt; adj; // u - {v1, v2, .... vk}
+    
+        int u, v;
+        for (int i = 0; i &lt; n; i++)
+        {
+            cin &gt;&gt; u &gt;&gt; v;
+            adj[u].push_back(v);
+            adj[v].push_back(u);
+        }
+        int s;
+        cout &lt;&lt; "Enter start vertext for dfs : ";
+        cin &gt;&gt; s;
+        dfs(adj, s);
+        cout &lt;&lt; "\n";
+    }
+    </pre>
+            <!-- Complexity Analysis -->
+            <h2 class="side_heading"> Complexity Analysis : </h2>
+            <p class="text"> Time complexity is : \(O(|V|+|E|)\) where \(|V|\) is number of vertices and \(|E|\) is number of edges .</p>
+            <p class="text"> \(|E|\) can be \(0\) to \(|V|^2\) </p>
+        </div>
+
+        <div id="resources" class="methods">
+
+            <h2>
+                video resources
+            </h2>
+
+            <h2>
+                web resources
+            </h2>
+<p class="text"><a href="https://en.wikipedia.org/wiki/Depth-first_search" style="text-decoration: none;">DFS wikipedia</a></p>
+            <h2>
+                book resources
+            </h2>
+
+        </div>
+
+
+    </div>
+</body>
+<script>
+    MathJax = {
+        options: {
+            //  HTML tags that won't be searched for math
+            skipHtmlTags: ['script', 'noscript', 'style', 'annotation', 'annotation-xml'],
+        },
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        svg: {
+            fontCache: 'global'
+        }
+    };
+
+</script>
+
+</html>

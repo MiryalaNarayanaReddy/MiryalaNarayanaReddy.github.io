@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- MathJax = {
+        options: {
+            //  HTML tags that won't be searched for math
+            skipHtmlTags: ['script', 'noscript', 'style', 'annotation', 'annotation-xml'],
+        },
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        svg: {
+            fontCache: 'global'
+        }
+    }; -->
+    <link rel="stylesheet" href="../../navigation_bar.css">
+    <link rel="stylesheet" href="../template.css">
+    <script src="../template.js"></script>
+    <script>
+        sessionStorage.setItem("page", "algorithm_list_6");
+        function goback() {
+            window.location.href = "../../html/classification.html"
+        }
+    </script>
+    <title>Knapsack</title>
+</head>
+
+<body>
+    <nav id="navbar">
+        <img src="../../../img/myimages/roundflower1.jpg" alt="">
+        <ul id="nav_item">
+            <li><a href="../../index.html" id="home">Home</a></li>
+            <li><a href="../../html/Algorithms.html" id="Algorithms">Importance of Algorithms</a></li>
+            <li><a href="../../html/classification.html" id="Algorithms">Important Algorithms</a></li>
+            <!-- <li><a href="Skills.html" id="Skills">Skills</a></li>
+            <li><a href="Contact.html" id="Contact"> Contact</a></li>
+            <li><a href="Education.html" id="Education">Education</a></li>
+            <li><a href="sitemap.html" id="Sitemap">Sitemap</a></li>
+            <li><a href="gallery.html" id="Gallery">Gallery</a></li> -->
+        </ul>
+
+        <!-- <h1 id="sideheading">
+          fibonacci numbers
+        </h1> -->
+    </nav>
+
+    <div class="second_nav">
+        <button class="button" id="b_introduction" onclick="Toggle('introduction')">Introduction</button>
+        <button class="button" id="b_method_1" onclick="Toggle('method_1')">Algorithm 1</button>
+        <!-- <button class="button" id="b_fibonacci_problem_1" onclick="Toggle('fibonacci_problem_1')">Problem 1</button> -->
+        <!-- <button class="button" id="b_resources" onclick="Toggle('resources')">Resources</button> -->
+    </div>
+
+    <div class="content">
+        <button class="backbutton" onclick="goback()">back</button>
+        <h1 class="heading">Knapsack</h1>
+        <div id="introduction">
+            <!-- introduction -->
+            <!-- <h2 class="side_heading">Introduction:</h2> -->
+            <div class="methods">
+                <h2 class="side_heading">Problem Statement:</h2>
+
+                <p class="text"></p>
+            </div>
+
+        </div>
+        <!-- Algorithm -->
+
+        <!-- Method 1:  -->
+
+        <div id="method_1" class="methods">
+            <h3 class="text"> Algorithm </h3>
+            <!-- <p class="text">1. we have an array of n numbers.</p> -->
+            <!-- Pseudo code -->
+            <h2 class="side_heading">Pseudo code : </h2>
+            <pre class="text prettyprint">
+knapsack(weight[],value[],w,n):
+    if n==0 or w==0 :
+        return 0
+    if weight[n-1]&lt;=w:
+        max1 = value[n-1]+knapsack(weight,value,w-weight[n-1],n-1)
+        max2 = knapsack(weight,value,w,n-1)
+        maximum = max (max1,max2)
+    else:
+        maximum  = knapsack(weight,value,w,n-1)
+    return maximum
+    </pre>
+
+            <!-- code -->
+            <h2 class="side_heading">Code : </h2>
+            <pre class="prettyprint">
+    #include &lt;iostream&gt;
+    using namespace std;
+    // 0-1 knapsack
+    
+    /*
+    
+    input 
+    n w
+    w[0] w[1] w[2] .... w[n]
+    v[0] v[1] v[2] .... v[n]
+    
+    */
+    
+    int kanpsack(int weight[], int value[], int w, int n)
+    {
+        if (n == 0||w==0)
+        {
+            return 0;
+        }
+        int max1, max2, maximum;
+        if (weight[n-1] &lt;= w)
+        {
+            // max1 = 1 + kanpsack(weight, value, w - weight[n], n - 1);
+            max1 = value[n-1] + kanpsack(weight, value, w - weight[n-1], n - 1);
+            max2 = kanpsack(weight, value, w, n - 1);
+            maximum = max1 &gt; max2 ? max1 : max2;
+        }
+        else
+        {
+            maximum = kanpsack(weight, value, w, n - 1);
+        }
+        return maximum;
+    }
+    
+    int main()
+    {
+        int n, w;
+        cin &gt;&gt; n &gt;&gt; w;
+        int weight[n], value[n];
+        for (int i = 0; i &lt; n; i++)
+        {
+            cin &gt;&gt; weight[i];
+        }
+        for (int i = 0; i &lt; n; i++)
+        {
+            cin &gt;&gt; value[i];
+        }
+        cout &lt;&lt; "number of items = " &lt;&lt; kanpsack(weight, value, w, n)&lt;&lt;"\n";
+    }
+                        
+    </pre>
+            <!-- Complexity Analysis -->
+            <h2 class="side_heading"> Complexity Analysis : </h2>
+            <p class="text">Time complexity: \(O(2^n)\) </p>
+        </div>
+
+        <div id="resources" class="methods">
+
+            <h2>
+                video resources
+            </h2>
+
+            <h2>
+                web resources
+            </h2>
+
+            <h2>
+                book resources
+            </h2>
+
+        </div>
+
+
+    </div>
+</body>
+<script>
+    MathJax = {
+        options: {
+            //  HTML tags that won't be searched for math
+            skipHtmlTags: ['script', 'noscript', 'style', 'annotation', 'annotation-xml'],
+        },
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        svg: {
+            fontCache: 'global'
+        }
+    };
+
+</script>
+
+</html>

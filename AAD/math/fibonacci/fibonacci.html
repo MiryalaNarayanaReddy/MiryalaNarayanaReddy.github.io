@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- MathJax = {
+        options: {
+            //  HTML tags that won't be searched for math
+            skipHtmlTags: ['script', 'noscript', 'style', 'annotation', 'annotation-xml'],
+        },
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        svg: {
+            fontCache: 'global'
+        }
+    }; -->
+    <link rel="stylesheet" href="../../../navigation_bar.css">
+    <link rel="stylesheet" href="../../template.css">
+    <script src="../../template.js"></script>
+    <script src="fibonacci.js"></script>
+    <script>
+        sessionStorage.setItem("page", "algorithm_list_1");
+        function goback() {
+            window.location.href = "../../../html/classification.html"
+        }
+    </script>
+    <title>Fibonacci</title>
+</head>
+
+<body>
+    <nav id="navbar">
+        <img src="../../../img/myimages/roundflower1.jpg" alt="">
+        <ul id="nav_item">
+            <li><a href="../../../index.html" id="home">Home</a></li>
+            <li><a href="../../../html/Algorithms.html" id="Algorithms">Importance of Algorithms</a></li>
+            <li><a href="../../../html/classification.html" id="Algorithms">Important Algorithms</a></li>
+            <!-- <li><a href="Skills.html" id="Skills">Skills</a></li>
+            <li><a href="Contact.html" id="Contact"> Contact</a></li>
+            <li><a href="Education.html" id="Education">Education</a></li>
+            <li><a href="sitemap.html" id="Sitemap">Sitemap</a></li>
+            <li><a href="gallery.html" id="Gallery">Gallery</a></li> -->
+        </ul>
+
+        <!-- <h1 id="sideheading">
+          fibonacci numbers
+        </h1> -->
+    </nav>
+
+    <div class="second_nav">
+        <button class="button" id="b_introduction" onclick="Toggle('introduction')">Introduction</button>
+        <button class="button" id="b_fibonacci_method_1" onclick="Toggle('fibonacci_method_1')">Algorithm 1</button>
+        <button class="button" id="b_fibonacci_method_2" onclick="Toggle('fibonacci_method_2')">Algorithm 2</button>
+        <button class="button" id="b_fibonacci_method_3" onclick="Toggle('fibonacci_method_3')">Algorithm 3</button>
+        <button class="button" id="b_fibonacci_method_4" onclick="Toggle('fibonacci_method_4')">Algorithm 4</button>
+        <!-- <button class="button" id="b_fibonacci_problem_1" onclick="Toggle('fibonacci_problem_1')">Problem 1</button> -->
+        <!-- <button class="button" id="b_fibonacci_resources" onclick="Toggle('fibonacci_resources')">Resources</button> -->
+    </div>
+
+    <div class="content">
+        <button class="backbutton" onclick="goback()">back</button>
+        <h1 class="heading">Fibonacci Numbers</h1>
+        <div id="introduction">
+            <!-- introduction -->
+            <h2 class="side_heading">Introduction:</h2>
+            <p class="text">Fibonacci sequence is a sequence of numbers starting with 0 and 1 and nth term of the
+                sequence is sum of previous two terms</p>
+            <p class="text">Fibonacci sequence : 0, 1, 1, 2, 3, 5, 8, 13, ....</p>
+
+            <p class="text">
+                generally \(n^{th}\) fibonacci term is denoted by \(F_n\) with $$F_n = F_{n-1} + F_{n-2}$$
+            </p>
+
+            <div class="methods">
+                <h2 class="side_heading">Problem Statement:</h2>
+                <p class="text">print n<sup>th</sup> fibonacci Number</p>
+            </div>
+
+        </div>
+        <!-- Algorithm -->
+
+        <!-- Method 1:  -->
+
+        <div id="fibonacci_method_1" class="methods">
+            <h3 class="text"> Algorithm 1 : Iterative Algorithm</h3>
+            <p class="text">1. Input is a number n .</p>
+            <p class="text">2. Take F(0) = 0 nd F(1)=1 as base case </p>
+            <p class="text">3. Use the formula F(n) = F(n-1)+F(n-2) to compute the n th fibonacci number</p>
+            <p class="text">4. compute F(2), F(3), F(4), .... till F(n) saving two previous terms on every iteration
+            </p>
+            <!-- Pseudo code -->
+            <h2 class="side_heading">Pseudo code : </h2>
+            <pre class="text prettyprint">
+    F(n):
+        if n == 1 :
+            return 1
+        else if n == 0 :
+            return 0
+        f0 = 0
+        f1 = 1
+        for i = 2 to n:
+            fn = f0 + f1
+            f0 = f1
+            f1 = fn
+        return fn
+    </pre>
+
+
+            <!-- code -->
+            <h2 class="side_heading">Code : </h2>
+            <pre class="prettyprint">
+    // nth fibonaci number
+    // naive 
+    // complexity O(n)
+    
+    #include &ltiostream&gt
+    using namespace std;
+    
+    int fibo(int n)
+    {
+        if (n == 0)
+        {
+            return 0;
+        }
+        else if (n == 1)
+        {
+            return 1;
+        }
+    
+        int f0 = 0; // first fibonacci number
+        int f1 = 1; // second fibonacci number
+        int fn;
+    
+        for (int i = 2; i &lt= n; i++)
+        {
+            fn = f0 + f1;
+            f0 = f1;
+            f1 = fn;
+        }
+        return fn; // will have the final result
+    }
+    
+    int main()
+    {
+        int n;
+        cout &lt&lt "Enter n: ";
+        cin &gt&gt n;
+        cout &lt&lt n &lt&lt "th fiboncci number is " &lt&lt fibo(n) &lt&lt "\n";
+    }
+    
+    </pre>
+            <!-- Complexity Analysis -->
+            <h2 class="side_heading"> Complexity Analysis : </h2>
+            <p class="text">
+                Since the code has to go through a loop of n the time complexity is <b>O(n)</b>
+            </p>
+
+        </div>
+
+        <!-- Method 2:  -->
+        <br>
+
+        <div id="fibonacci_method_2" class="methods">
+            <h3 class="text">Algorithm 2 : Recursive Algorithm</h3>
+            <p class="text">1. Here we recurse from F(n) to calculate F(n-1) and F(n-2).</p>
+            <p class="text">2. Recursion will end with base case F(0) = 0 and F(1) = 0 .</p>
+
+            <!-- Pseudo code -->
+            <h2 class="side_heading">Pseudo code : </h2>
+            <pre class="text prettyprint">
+    F(n):
+        if n == 1 :
+            return 1
+        else if n == 0 :
+            return 0
+        return f(n-1)+f(n-2)
+
+    </pre>
+
+            <!-- code -->
+            <h2 class="side_heading">Code : </h2>
+            <pre class="prettyprint">
+    // nth fibonaci number
+    // recurrsive
+    // complexity O(2^n)
+    
+    #include &ltiostream&gt
+    using namespace std;
+    
+    int fibo(int n)
+    {
+        if (n == 0)
+        {
+            return 0;
+        }
+        else if (n == 1)
+        {
+            return 1;
+        }
+    
+        return fibo(n - 1) + fibo(n - 2);
+    }
+    
+    int main()
+    {
+        int n;
+        cout &lt&lt "Enter n: ";
+        cin &gt&gt n;
+        cout &lt&lt n &lt&lt "th fiboncci number is " &lt&lt fibo(n) &lt&lt "\n";
+    }
+                
+    </pre>
+            <!-- Complexity Analysis -->
+            <h2 class="side_heading"> Complexity Analysis : </h2>
+            <pre class="text">
+    T(n) = T(n-1) + T(n-2) + c     where c is some constant
+         &approx; 2*T(n-1) + c    taking T(n-2) &approx; T(n-1)
+    Now,
+        T(n-1) &approx; 2*T(n-2) + c
+    
+    &Implies;   T(n)  = 2*(2*T(n-2)+c)+c
+
+                T(n)  = 4T(n-2)+3c
+                      = 8T(n-3)+7c
+                      ......
+                      .......
+                      ....... 
+                      = 2<sup>k</sup>T(n-k)+(2<sup>k</sup>-1)*c
+    The recursion ends when k = n ...
+    T(n) = 2<sup>n</sup>T(0)+(2<sup>n</sup>-1)*c
+         &approx; 2<sup>n</sup>+(2<sup>n</sup>)*c
+         &approx; 2<sup>n</sup>(1+c)
+         &approx; 2<sup>n</sup>
+    Hence Time complexity of Recursive approach is <b> O(2<sup>n</sup>)</b>
+
+
+    But the above one is not the best upper bound .
+ solving linear recursive equation \( T(n) = T(n-1) + T(n-2) \) we get
+
+            \( T(n) = O( &phi;^n ) \)
+            where  \(  &phi; = \frac{1+\sqrt{5}}{2}  \) ( golden ratio ....)
+    </pre>
+
+        </div>
+
+        <!-- Method 3:  -->
+        <br>
+        <div id="fibonacci_method_3" class="methods">
+            <h3 class="text">Algorithm 3: matrix method</h3>
+            <p class="text"> we use the following formula to get the nth fibonacci number </p>
+            <p class="text"> $$\begin{pmatrix} F_{n+1} & F_n\\ F_{n} & F_{n-1}\\\end{pmatrix} = \begin{pmatrix} 1 & 1 \\
+                1 & 0 \\\end{pmatrix}^n$$ </p>
+            <!-- Pseudo code -->
+            <h2 class="side_heading">Pseudo code : </h2>
+            <pre class="text prettyprint">
+F(n):
+    if n == 0 :
+        return 0
+    else if n == 1 :
+        return 1
+    <!-- calculate m <sup>n</sup> where <p>  $$\begin{pmatrix} 1 & 1 \\ 1 & 0 \\\end{pmatrix}$$ </p> -->
+    calculate m = 
+                    <img src="fibo.png" style="display: inline-block;" alt=""> 
+<!-- \(\begin{pmatrix} 1 & 1 \\ 1 & 0 \\ \end{pmatrix}^n\) -->
+    return m[0][1]
+    </pre>
+
+            <!-- code -->
+            <h2 class="side_heading">Code : </h2>
+            <pre class="prettyprint">
+    // nth fibonaci number
+    // using matrix multiplication
+    
+    #include &lt;iostream&gt;
+    using namespace std;
+    // f1 f2 f3 f4 f5 f6 f7  f8  f9  f10 ......
+    // 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, .......
+    
+    void multiplty(int a[2][2], int b[2][2])
+    {
+        int res[2][2];
+        res[0][0] = a[0][0] * b[0][0] + a[0][1] * b[1][0];
+        res[0][1] = a[0][0] * b[0][1] + a[0][1] * b[1][1];
+        res[1][0] = a[1][0] * b[0][0] + a[1][1] * b[1][0];
+        res[1][1] = a[1][0] * b[0][1] + a[1][1] * b[1][1];
+        a[0][0] = res[0][0];
+        a[0][1] = res[0][1];
+        a[1][0] = res[1][0];
+        a[1][1] = res[1][1];
+    }
+    
+    int fibo(int n)
+    {
+    
+        if (n == 0)
+        {
+            return 0;
+        }
+        else if (n == 1)
+        {
+            return 1;
+        }
+    
+        int res[2][2] = {
+            {1, 1},
+            {1, 0}};
+    
+        int f[2][2] = {
+            {1, 1},
+            {1, 0}};
+    
+        for(int i=2;i&lt;n;i++)
+        {
+            multiplty(res,f);
+        }
+    
+        return res[0][1];
+    
+    }
+    
+    int main()
+    {
+        int n;
+        cout &lt;&lt; "Enter n: ";
+        cin &gt;&gt; n;
+        cout &lt;&lt; n &lt;&lt; "th fiboncci number is " &lt;&lt; fibo(n) &lt;&lt; "\n";
+    }
+
+    </pre>
+            <!-- Complexity Analysis -->
+            <h2 class="side_heading"> Complexity Analysis : </h2>
+            <p class="text">
+                Time complexity : \(O(M(n)n)\) where \(M(n)\) is complexity of multiplying two numbers and n is
+                complexity of multiplying the matrix n times
+            </p>
+            <p class="text">complexity can be optimized to \(O(M(n)logn)\) by using binary exponentiation method. ( Try
+                to write the code )</p>
+        </div>
+
+        <!-- Method 4:  -->
+
+        <br>
+        <div id="fibonacci_method_4" class="methods">
+            <h3 class="text">Algorithm 4: Direct formula method</h3>
+            <p class="text"> we use the following formula to get the nth fibonacci number </p>
+            <p class="text"> $$ F(n) = \frac{&phi;^n}{\sqrt{5}}$$ </p>
+            <!-- Pseudo code -->
+            <h2 class="side_heading">Pseudo code : </h2>
+            <pre class="text prettyprint">
+F(n):
+    if n == 0 :
+        return 0
+    else if n == 1 :
+        return 1
+    <!-- calculate m <sup>n</sup> where <p>  $$\begin{pmatrix} 1 & 1 \\ 1 & 0 \\\end{pmatrix}$$ </p> -->
+    return 
+    <img src="f2.png" alt="" height=80px" >
+    <!-- \(\frac{&phi;^n}{\sqrt{5}}\) -->
+   
+
+</pre>
+            <!-- code -->
+            <h2 class="side_heading">Code : </h2>
+            <pre class="prettyprint">
+    // nth fibonacci number
+    // using formula
+
+    // f0 f1 f2 f3 f4 f5 f6 f7 f8  f9  f10 ......
+    // 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, .......
+
+    #include &lt;iostream&gt;
+    #include &lt;cmath&gt;
+
+    using namespace std;
+
+    int fibo(int n)
+    {
+        double phi = (1+sqrt(5))/2;
+        return round(pow(phi,n)/sqrt(5));
+    }
+
+    int main()
+    {
+        int n;
+        cout &lt;&lt; "Enter n: ";
+        cin &gt;&gt; n;
+        cout &lt;&lt; n &lt;&lt; "th fiboncci number is " &lt;&lt; fibo(n) &lt;&lt; "\n";
+    }
+
+</pre>
+            <!-- Complexity Analysis -->
+            <h2 class="side_heading"> Complexity Analysis : </h2>
+            <p class="text">Time complexity : \(O(n)\) </p>
+            <p class="text">This can be optimised to \(O(logn)\) using binary exponentiation.</p>
+            <p class="text">Anyway this is not generally used because &phi; is irrational since we take its approximate
+                value 1.618... and some decimal places are lost during floating point multiplication</p>
+
+        </div>
+
+
+
+        <!-- Problems -->
+
+        <!-- problem 1 -->
+
+        <!-- <div id="fibonacci_problem_1" class="text methods">Problem 1: Print all fibonacci numbers less than n . <br>
+            <button class="solution_button" onclick="show_solution('fibonacci_solution_1')">Solution(s)</button>
+            <div id="fibonacci_solution_1">
+
+                <h3>solution 1</h3>
+                <pre class="prettyprint" id="fibonacci_solution_1a">
+    // print fibonacci upto n
+    // complexity O()
+    #include &lt;stdio.h&gt;
+    #include &lt;stdbool.h&gt;
+    #include &lt;math.h&gt;
+    
+    bool Isfibonacci(int n)
+    {
+        if (n &lt; 2)
+        {
+            return false;
+        }
+        else if (n == 2)
+        {
+            return true;
+        }
+    
+        for (int i = 2; i &lt;= sqrt(n); i++)
+        {
+            if (n % i == 0)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    int main()
+    {
+        int n;
+        printf("Enter a number: ");
+        scanf("%d", &n);
+    
+        for(int i=2;i&lt;n;i++)
+        {
+            if(Isfibonacci(i))
+            {
+                printf("%d ",i);
+            }
+        }
+        printf("\n");
+    }
+        </pre>
+                <br>
+                <h3>Solution 2</h3>
+                <pre class="prettyprint" id="fibonacci_solution_1b">
+    // print fibonacci upto n
+    // complexity O()
+    #include &lt;stdio.h&gt;
+    #include &lt;stdbool.h&gt;
+    #include &lt;math.h&gt;
+
+    bool Isfibonacci(int n)
+    {
+        if (n &lt; 2)
+        {
+            return false;
+        }
+        else if (n == 2)
+        {
+            return true;
+        }
+
+        for (int i = 2; i &lt;= sqrt(n); i++)
+        {
+            if (n % i == 0)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    int main()
+    {
+        int n;
+        printf("Enter a number: ");
+        scanf("%d", &n);
+
+        for(int i=2;i&lt;n;i++)
+        {
+            if(Isfibonacci(i))
+            {
+                printf("%d ",i);
+            }
+        }
+        printf("\n");
+    }
+    </pre>
+            </div>
+        </div> -->
+
+        <div id="fibonacci_resources" class="methods resources">
+
+            <h2>
+                video resources
+            </h2>
+
+            <h2>
+                web resources
+            </h2>
+
+            <h2>
+                book resources
+            </h2>
+
+        </div>
+
+
+    </div>
+</body>
+<script>
+    MathJax = {
+        options: {
+            //  HTML tags that won't be searched for math
+            skipHtmlTags: ['script', 'noscript', 'style', 'annotation', 'annotation-xml'],
+        },
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        svg: {
+            fontCache: 'global'
+        }
+    };
+
+</script>
+
+</html>

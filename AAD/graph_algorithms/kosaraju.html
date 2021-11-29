@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- MathJax = {
+        options: {
+            //  HTML tags that won't be searched for math
+            skipHtmlTags: ['script', 'noscript', 'style', 'annotation', 'annotation-xml'],
+        },
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        svg: {
+            fontCache: 'global'
+        }
+    }; -->
+    <link rel="stylesheet" href="../../navigation_bar.css">
+    <link rel="stylesheet" href="../template.css">
+    <script src="../template.js"></script>
+    <script>
+        sessionStorage.setItem("page", "algorithm_list_8");
+        function goback() {
+            window.location.href = "../../html/classification.html"
+        }
+    </script>
+    <title>Kosaraju</title>
+</head>
+
+<body>
+    <nav id="navbar">
+        <img src="../../../img/myimages/roundflower1.jpg" alt="">
+        <ul id="nav_item">
+            <li><a href="../../index.html" id="home">Home</a></li>
+            <li><a href="../../html/Algorithms.html" id="Algorithms">Importance of Algorithms</a></li>
+            <li><a href="../../html/classification.html" id="Algorithms">Important Algorithms</a></li>
+            <!-- <li><a href="Skills.html" id="Skills">Skills</a></li>
+            <li><a href="Contact.html" id="Contact"> Contact</a></li>
+            <li><a href="Education.html" id="Education">Education</a></li>
+            <li><a href="sitemap.html" id="Sitemap">Sitemap</a></li>
+            <li><a href="gallery.html" id="Gallery">Gallery</a></li> -->
+        </ul>
+
+        <!-- <h1 id="sideheading">
+          fibonacci numbers
+        </h1> -->
+    </nav>
+
+    <div class="second_nav">
+        <button class="button" id="b_introduction" onclick="Toggle('introduction')">Introduction</button>
+        <button class="button" id="b_method_1" onclick="Toggle('method_1')">Algorithm 1</button>
+        <!-- <button class="button" id="b_fibonacci_problem_1" onclick="Toggle('fibonacci_problem_1')">Problem 1</button> -->
+        <!-- <button class="button" id="b_resources" onclick="Toggle('resources')">Resources</button> -->
+    </div>
+
+    <div class="content">
+        <button class="backbutton" onclick="goback()">back</button>
+        <h1 class="heading">Kosaraju</h1>
+        <div id="introduction">
+            <!-- introduction -->
+            <h2 class="side_heading">Introduction:</h2>
+            <p class="text"> This algorithm is simplest way of finding strongly connected components of a graph.</p>
+
+            <div class="methods">
+                <h2 class="side_heading">Problem Statement:</h2>
+
+                <p class="text">print the vertices of strongly connected components in a graph G.</p>
+            </div>
+
+        </div>
+        <!-- Algorithm -->
+
+        <!-- Method 1:  -->
+
+        <div id="method_1" class="methods">
+            <h3 class="text"> Algorithm </h3>
+            <p class="text">1. mark all vertices as not visited</p>
+            <p class="text">2. Do DFS for all non visited vertices while also storing the finished vertex into an array L.</p>
+            <p class="text">3. create another graph \(G^T\) a transpose of given graph G. </p>
+            <p class="text">4. do step 1 and do dfs on \(G^T\) for all unvisited vertices of L in reverse order .every time we call dfs we get a component,i.e., all those vertices reachable from u in L are in one connected component.  </p>
+            <!-- Pseudo code -->
+            <!-- <h2 class="side_heading">Pseudo code : </h2>
+            <pre class="text prettyprint">
+
+    </pre> -->
+
+            <!-- code -->
+            <h2 class="side_heading">Code : </h2>
+            <pre class="prettyprint">
+    #include &lt;bits/stdc++.h&gt;
+    using namespace std;
+    
+    vector&lt;int&gt; visited;
+    vector&lt;int&gt; ordered_list; // contains exit time of node in dfs
+    vector&lt;vector&lt;int&gt;&gt; scc;
+    vector&lt;int&gt; component;
+    
+    void dfs(map&lt;int, vector&lt;int&gt;&gt; &adj, int s)
+    {
+        visited[s] = true;
+        // cout &lt;&lt; s &lt;&lt; " ";
+        for (auto u : adj[s])
+        {
+            if (!visited[u])
+            {
+                dfs(adj, u);
+            }
+        }
+        ordered_list.push_back(s);
+    }
+    
+    void dfs_GT(map&lt;int, vector&lt;int&gt;&gt; &adj_GT, int s)
+    {
+        visited[s] = true;
+        component.push_back(s);
+        for (auto u : adj_GT[s])
+        {
+            if (!visited[u])
+            {
+                dfs_GT(adj_GT, u);
+            }
+        }
+    }
+    
+    int main()
+    {
+        int num_edges;
+        cin &gt;&gt; num_edges;
+    
+        map&lt;int, vector&lt;int&gt;&gt; adj;
+        // u - {v1, v2, .... vk}
+        // only directed edges
+        int u, v;
+    
+        for (int i = 0; i &lt; num_edges; i++)
+        {
+            cin &gt;&gt; u &gt;&gt; v;
+            adj[u].push_back(v);
+        }
+        int n = adj.size();
+        visited.assign(n, false);
+        for (int i = 0; i &lt; n; i++)
+        {
+            if (!visited[i])
+            {
+                dfs(adj, i);
+            }
+        }
+    
+        /// transpose
+    
+        map&lt;int, vector&lt;int&gt;&gt; adj_GT;
+        for (auto u : adj)
+        {
+            for (auto v : u.second)
+            {
+                adj_GT[v].push_back(u.first);
+            }
+        }
+        visited.assign(n, false);
+        reverse(ordered_list.begin(), ordered_list.end());
+    
+        for (auto u : ordered_list)
+        {
+            if (!visited[u])
+            {
+                dfs_GT(adj_GT, u);
+                scc.push_back(component);
+                component.clear();
+            }
+        }
+    
+        for (auto connected_component : scc)
+        {
+            cout &lt;&lt; "vertices in connected component: ";
+            for (auto v : connected_component)
+            {
+                cout &lt;&lt; v &lt;&lt; " ";
+            }
+            cout &lt;&lt; "\n";
+        }
+    }
+                        
+    </pre>
+            <!-- Complexity Analysis -->
+            <h2 class="side_heading"> Complexity Analysis : </h2>
+            <p class="text"> Time Complexity: \(O(|V|+|E|)\) because the are two DFSs that we doing .</p>
+        </div>
+
+        <div id="resources" class="methods">
+
+            <h2>
+                video resources
+            </h2>
+
+            <h2>
+                web resources
+            </h2>
+<p class="text"><a href="https://en.wikipedia.org/wiki/Kosaraju%27s_algorithm" style="text-decoration: none;">wikipedia</a></p>
+            <h2>
+                book resources
+            </h2>
+
+        </div>
+
+
+    </div>
+</body>
+<script>
+    MathJax = {
+        options: {
+            //  HTML tags that won't be searched for math
+            skipHtmlTags: ['script', 'noscript', 'style', 'annotation', 'annotation-xml'],
+        },
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        svg: {
+            fontCache: 'global'
+        }
+    };
+
+</script>
+
+</html>

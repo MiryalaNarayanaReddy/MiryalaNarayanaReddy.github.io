@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- MathJax = {
+        options: {
+            //  HTML tags that won't be searched for math
+            skipHtmlTags: ['script', 'noscript', 'style', 'annotation', 'annotation-xml'],
+        },
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        svg: {
+            fontCache: 'global'
+        }
+    }; -->
+    <link rel="stylesheet" href="../../navigation_bar.css">
+    <link rel="stylesheet" href="../template.css">
+    <script src="../template.js"></script>
+    <script>
+        sessionStorage.setItem("page", "algorithm_list_3");
+        function goback() {
+            window.location.href = "../../html/classification.html"
+        }
+    </script>
+    <title>Linear sort</title>
+</head>
+
+<body>
+    <nav id="navbar">
+        <img src="../../../img/myimages/roundflower1.jpg" alt="">
+        <ul id="nav_item">
+            <li><a href="../../index.html" id="home">Home</a></li>
+            <li><a href="../../html/Algorithms.html" id="Algorithms">Importance of Algorithms</a></li>
+            <li><a href="../../html/classification.html" id="Algorithms">Important Algorithms</a></li>
+            <!-- <li><a href="Skills.html" id="Skills">Skills</a></li>
+            <li><a href="Contact.html" id="Contact"> Contact</a></li>
+            <li><a href="Education.html" id="Education">Education</a></li>
+            <li><a href="sitemap.html" id="Sitemap">Sitemap</a></li>
+            <li><a href="gallery.html" id="Gallery">Gallery</a></li> -->
+        </ul>
+
+        <!-- <h1 id="sideheading">
+          fibonacci numbers
+        </h1> -->
+    </nav>
+
+    <div class="second_nav">
+        <button class="button" id="b_introduction" onclick="Toggle('introduction')">Introduction</button>
+        <button class="button" id="b_method_1" onclick="Toggle('method_1')">Algorithm 1</button>
+        <!-- <button class="button" id="b_fibonacci_problem_1" onclick="Toggle('fibonacci_problem_1')">Problem 1</button> -->
+        <!-- <button class="button" id="b_resources" onclick="Toggle('resources')">Resources</button> -->
+    </div>
+
+    <div class="content">
+        <button class="backbutton" onclick="goback()">back</button>
+        <h1 class="heading">Linear sort</h1>
+        <div id="introduction">
+            <!-- introduction -->
+            <h2 class="side_heading">Introduction:</h2>
+            <p class="text">This is a <b> comparison based sort </b> where we swap the largest element in the array a[0 .. n-1] with a[n-1] and recurrsively do the same for array a[0 .. n-2] (i.e., excluding the largest element and taking array of size n-1) . Do this till we have only one element left a[0]. </p>
+
+            <div class="methods">
+                <h2 class="side_heading">Problem Statement:</h2>
+
+                <p class="text">Sort an array of n integers</p>
+            </div>
+
+        </div>
+        <!-- Algorithm -->
+
+        <!-- Method 1:  -->
+
+        <div id="method_1" class="methods">
+            <h3 class="text"> Algorithm </h3>
+            <p class="text">1. we have an array of n numbers.</p>
+            <p class="text">2. In this method we bubble large numbers to right side.... ( to get sorted array in ascending order ) </p>
+            <p class="text">3. In first iteration we compare adjacent numbers and swap larger to right.</p>
+            <p class="text"> i.e., for i = 0 to size of n-1 if a[i] > a[i+1] then swap(a[i], a[i+1])
+                after this iteration we see that the largest number in the array will be at the right end.</p>
+            <p class="text">4. Now repeat the above iteration again with one less array size ...we will see that second
+                largest will be at the second position from the end ...</p>
+            <p class="text">5.we repeat the above step untill array size is 0</p>
+            <p class="text">6. After all iterations the array will be sorted.</p>
+            <!-- Pseudo code -->
+            <h2 class="side_heading">Pseudo code : </h2>
+            <pre class="text prettyprint">
+linear_sort(a[], n):
+    if n == 1:
+        return
+    max = a[n-1]
+    for i = 0 to n-1:
+        if a[i] > max:
+            swap(a[i], a[n-1])
+    linear_sort(a, n-1)
+    </pre>
+
+            <!-- code -->
+            <h2 class="side_heading">Code : </h2>
+            <pre class="prettyprint">
+    #include &lt;bits/stdc++.h&gt;
+    using namespace std;
+    
+    
+    void linear_sort(int a[], int n)
+    {
+        // if size 1 return
+        if (n == 1)
+        {
+            return;
+        }
+        int max = a[n - 1];
+        // Assume last element is max
+        for (int i = 0; i &lt; n - 1; i++) // from 0 to i-2 (inclusive)
+        {
+            if (a[i] &gt; max) // compare every element with last i.e max and swap if greater.
+            {
+                max = a[i];
+                swap(a[i], a[n - 1]);
+            }
+        }
+        linear_sort(a, n - 1);//sort the n-1 size array
+    }
+    
+    
+    int main()
+    {
+        int n;
+        cout &lt;&lt; "Enter n: ";
+        cin &gt;&gt; n;
+        int a[n];
+        for (int i = 0; i &lt; n; i++)
+        {
+            cin &gt;&gt; a[i];
+        }
+        linear_sort(a, n);
+        for (int i = 0; i &lt; n; i++)
+        {
+            cout &lt;&lt; a[i] &lt;&lt; " ";
+        }
+        printf("\n");
+    }
+    </pre>
+            <!-- Complexity Analysis -->
+            <h2 class="side_heading"> Complexity Analysis : </h2>
+            <p class="text">Time complexity is \(O(n^2)\) since \(O(n)\) is for n recursions and O(n) is for find maximum element each time</p>
+        </div>
+
+        <div id="resources" class="methods">
+
+            <h2>
+                video resources
+            </h2>
+
+            <h2>
+                web resources
+            </h2>
+
+            <h2>
+                book resources
+            </h2>
+
+        </div>
+
+
+    </div>
+</body>
+<script>
+    MathJax = {
+        options: {
+            //  HTML tags that won't be searched for math
+            skipHtmlTags: ['script', 'noscript', 'style', 'annotation', 'annotation-xml'],
+        },
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        svg: {
+            fontCache: 'global'
+        }
+    };
+
+</script>
+
+</html>

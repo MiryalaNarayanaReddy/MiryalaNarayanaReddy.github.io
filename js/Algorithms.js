@@ -1,49 +1,29 @@
 
 window.onload = function () {
     // document.getElementById('introduction').style.display = 'none';
-    document.getElementById('introduction').style.backgroundColor = "white";
-    document.getElementById('introduction').style.color = "black";
+    document.getElementById('definition').style.backgroundColor = "white";
+    document.getElementById('definition').style.color = "black";
     try {
-        document.getElementById('method_1').style.display = 'none';
+        document.getElementById('importance').style.display = 'none';
     } catch (err) {
         console.log(err);
     }
     try {
-        document.getElementById('method_2').style.display = 'none';
+        document.getElementById('history').style.display = 'none';
     } catch (err) {
         console.log(err);
     }
     try {
-        document.getElementById('method_3').style.display = 'none';
-    } catch (err) {
-        console.log(err);
-    }
-    try {
-        document.getElementById('method_4').style.display = 'none';
+        document.getElementById('mastery').style.display = 'none';
     } catch (err) {
         console.log(err);
     }
 
-    try {
-        document.getElementById('problem_1').style.display = 'none';
-    } catch (err) {
-        console.log(err);
-    }
-    try {
-        document.getElementById('solution_1').style.display = 'none';
-    } catch (err) {
-        console.log(err);
-    }
-    try {
-        document.getElementById('resources').style.display = 'none';
-    } catch (err) {
-        console.log(err);
-    }
-    
+    Toggle('definition');
 };
 
 
-var open_block = "introduction";
+var open_block = "definition";
 
 function Toggle(id) {
 
@@ -73,17 +53,3 @@ function Toggle(id) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
     // document.getElementsByClassName("content")[0].scrollIntoView();
 }
-
-
-function show_solution(id) {
-    var x = document.getElementById(id);
-
-    if (x.style.display === "none") {
-        x.style.display = "block";
-    }
-    else {
-        x.style.display = "none";
-    }
-}
-
-

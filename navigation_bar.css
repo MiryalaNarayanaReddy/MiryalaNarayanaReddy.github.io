@@ -13,6 +13,8 @@
     align-items: center;
     top: 0px;
     position: sticky;
+    background: url('img/background_images/flower.jpg');
+    background-position: bottom;
   }
 
   #navbar img {
@@ -69,7 +71,7 @@
     margin-right: 100px;
     color: white;
     font-family: sans-serif;
-    font-size: 3rem;
+    font-size: 2rem;
     display: flex;
   }
 }
@@ -89,7 +91,9 @@
     width: auto;
     align-items: center;
     top: 0px;
-    position: relative;
+    position: sticky;
+    background: url('img/background_images/flower.jpg');
+    background-position: bottom;
   }
 
   #navbar img {
@@ -147,7 +151,7 @@
     margin-right: 100px;
     color: white;
     font-family: sans-serif;
-    font-size: 3rem;
+    font-size: 2rem;
     display: flex;
   }
 }
@@ -169,7 +173,9 @@
     width: auto;
     align-items: center;
     top: 0px;
-    position: relative;
+    position: sticky;
+    background: url('img/background_images/flower.jpg');
+    background-position: bottom;
   }
 
   #navbar img {

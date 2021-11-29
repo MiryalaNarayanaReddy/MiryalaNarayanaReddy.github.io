@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- MathJax = {
+        options: {
+            //  HTML tags that won't be searched for math
+            skipHtmlTags: ['script', 'noscript', 'style', 'annotation', 'annotation-xml'],
+        },
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        svg: {
+            fontCache: 'global'
+        }
+    }; -->
+    <link rel="stylesheet" href="../../navigation_bar.css">
+    <link rel="stylesheet" href="../template.css">
+    <script src="../template.js"></script>
+    <script>
+        sessionStorage.setItem("page", "algorithm_list_8");
+        function goback() {
+            window.location.href = "../../html/classification.html"
+        }
+    </script>
+    <title>Kruskal</title>
+</head>
+
+<body>
+    <nav id="navbar">
+        <img src="../../../img/myimages/roundflower1.jpg" alt="">
+        <ul id="nav_item">
+            <li><a href="../../index.html" id="home">Home</a></li>
+            <li><a href="../../html/Algorithms.html" id="Algorithms">Importance of Algorithms</a></li>
+            <li><a href="../../html/classification.html" id="Algorithms">Important Algorithms</a></li>
+            <!-- <li><a href="Skills.html" id="Skills">Skills</a></li>
+            <li><a href="Contact.html" id="Contact"> Contact</a></li>
+            <li><a href="Education.html" id="Education">Education</a></li>
+            <li><a href="sitemap.html" id="Sitemap">Sitemap</a></li>
+            <li><a href="gallery.html" id="Gallery">Gallery</a></li> -->
+        </ul>
+
+        <!-- <h1 id="sideheading">
+          fibonacci numbers
+        </h1> -->
+    </nav>
+
+    <div class="second_nav">
+        <button class="button" id="b_introduction" onclick="Toggle('introduction')">Introduction</button>
+        <button class="button" id="b_method_1" onclick="Toggle('method_1')">Algorithm 1</button>
+        <!-- <button class="button" id="b_fibonacci_problem_1" onclick="Toggle('fibonacci_problem_1')">Problem 1</button> -->
+        <!-- <button class="button" id="b_resources" onclick="Toggle('resources')">Resources</button> -->
+    </div>
+
+    <div class="content">
+        <button class="backbutton" onclick="goback()">back</button>
+        <h1 class="heading">Kruskal</h1>
+        <div id="introduction">
+            <!-- introduction -->
+            <h2 class="side_heading">Introduction:</h2>
+            <p class="text">This algorithm finds an MST(minimum spanning tree) from a connected undirected graph. Remember that this algorithm fails sometimes in case of directed graph since kruskal's algorithm finds a cylce when there is none.</p>
+
+            <div class="methods">
+                <h2 class="side_heading">Problem Statement:</h2>
+
+                <p class="text">search for an element in an array</p>
+            </div>
+
+        </div>
+        <!-- Algorithm -->
+
+        <!-- Method 1:  -->
+
+        <div id="method_1" class="methods">
+            <h3 class="text"> Algorithm </h3>
+            <!-- <p class="text">1.  </p>
+            <p class="text">2. </p> -->
+            <!-- Pseudo code -->
+            <!-- <h2 class="side_heading">Pseudo code : </h2>
+            <pre class="text prettyprint">
+
+    </pre> -->
+
+            <!-- code -->
+            <h2 class="side_heading">Code : </h2>
+            <pre class="prettyprint">
+    #include &lt;bits/stdc++.h&gt;
+    using namespace std;
+    
+    #define adjacency_list map&lt;int, vector&lt;pair&lt;int, int&gt;&gt;&gt;
+    #define mp make_pair
+    #define INF INT_MAX
+    
+    typedef struct edge
+    {
+        int u;
+        int v;
+        int w;
+    } Edge;
+    
+    typedef struct graph
+    {
+        adjacency_list adj;
+    
+        int num_edges;
+        int num_vertices;
+        Edge *edge;
+    } graph;
+    
+    int edge_compare(const void *a, const void *b)
+    {
+        Edge *c = (Edge *)a;
+        Edge *d = (Edge *)b;
+        return c-&gt;w &gt; d-&gt;w; // return 1 i.e., swap if greater
+    }
+    
+    int find_parent(map&lt;int, int&gt; &parent, int u)
+    {
+        if (parent[u] != u)
+        {
+            parent[u] = find_parent(parent, parent[u]);
+        }
+        return parent[u];
+    }
+    
+    void Union(map&lt;int, int&gt; &rank, map&lt;int, int&gt; &parent, int rootu, int rootv)
+    {
+        if (rank[rootu] &lt; rank[rootv])
+        {
+            parent[rootu] = rootv;
+        }
+        else if (rank[rootv] &lt; rank[rootu])
+        {
+            parent[rootv] = rootu;
+        }
+        else
+        {
+            parent[rootv] = rootu;
+            rank[rootu]++;
+        }
+    }
+    
+    void kruskal(graph G)
+    {
+        qsort(G.edge, G.num_edges, sizeof(Edge), edge_compare);
+    
+        // cout&lt;&lt;"kruskal-"&lt;&lt;G.num_edges&lt;&lt;"\n";
+        map&lt;int, int&gt; parent;
+        map&lt;int, int&gt; rank;
+    
+        for (int i = 0; i &lt; G.num_vertices; i++)
+        {
+            parent[i] = i;
+            // rank[i] = 0; // not needed since we are using map
+        }
+    
+        int sum = 0, cnt = 0, i = 0;
+        for (int i = 0; i &lt; G.num_edges; i++)
+        {
+            int rootu = find_parent(parent, G.edge[i].u);
+            int rootv = find_parent(parent, G.edge[i].v);
+            if (rootu != rootv)
+            {
+                Union(rank, parent, rootu, rootv);
+                cnt++;
+                // this edge is part of MST
+                sum += G.edge[i].w;
+                cout &lt;&lt; G.edge[i].u &lt;&lt; " " &lt;&lt; G.edge[i].v &lt;&lt; " " &lt;&lt; G.edge[i].w &lt;&lt; "\n";
+    
+                if (cnt &gt;= G.num_vertices - 1)
+                {
+                    break;
+                }
+            }
+        }
+        cout &lt;&lt; sum &lt;&lt; "\n";
+    }
+    
+    int main()
+    {
+        // undirected graph
+    
+        graph G; // u - {{v1,w1}, {v2, w2}, .... {vk,wk}}
+        cin &gt;&gt; G.num_vertices;
+        cin &gt;&gt; G.num_edges;
+        G.edge = new Edge[G.num_edges];
+        int u, v, w;
+        for (int i = 0; i &lt; G.num_edges; i++)
+        {
+            cin &gt;&gt; G.edge[i].u &gt;&gt; G.edge[i].v &gt;&gt; G.edge[i].w;
+        }
+    
+        kruskal(G);
+        // cout &lt;&lt; "\n";
+    }
+                       
+    </pre>
+            <!-- Complexity Analysis -->
+            <h2 class="side_heading"> Complexity Analysis : </h2>
+            <p class="text">best case : \(O(n)\) when array is already sorted</p>
+            <p class="text">worst case \(O(n^2)\) when array is reverse sorted</p>
+            <p class="text">So complexity lies between these two extremes.</p>
+        </div>
+
+        <div id="resources" class="methods">
+
+            <h2>
+                video resources
+            </h2>
+
+            <h2>
+                web resources
+            </h2>
+
+            <h2>
+                book resources
+            </h2>
+
+        </div>
+
+
+    </div>
+</body>
+<script>
+    MathJax = {
+        options: {
+            //  HTML tags that won't be searched for math
+            skipHtmlTags: ['script', 'noscript', 'style', 'annotation', 'annotation-xml'],
+        },
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        svg: {
+            fontCache: 'global'
+        }
+    };
+
+</script>
+
+</html>

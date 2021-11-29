@@ -6,7 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="../navigation_bar.css">
-  <!-- <link rel="stylesheet" href="../css/Algorithms.css"> -->
+  <link rel="stylesheet" href="../css/Classification.css">
+  <script src="../js/classification.js"></script>
   <title>Classification of Algorithms</title>
 </head>
 
@@ -16,30 +17,336 @@
     <img src="../img/myimages/roundflower1.jpg" alt="">
     <ul id="nav_item">
       <li><a href="../index.html" id="home" class="no-hover">Home</a></li>
-      <li><a href="Algorithms.html" id="Algorithms" class="no-hover">Algorithms</a></li>
-      <li><a href="classification.html" id="Classification">Classification of Algorithms</a></li>
+      <li><a href="Algorithms.html" id="Algorithms" class="no-hover">Importance of Algorithms</a></li>
+      <li><a href="classification.html" id="Classification">Important Algorithms</a></li>
       <!-- <li><a href="Skills.html" id="Skills" class="no-hover">Skills</a></li>
       <li><a href="Contact.html" id="Contact" class="no-hover"> Contact</a></li>
       <li><a href="Education.html" id="Education" class="no-hover">Education</a></li>
       <li><a href="sitemap.html" id="Sitemap" class="no-hover">Sitemap</a></li>
       <li><a href="gallery.html" id="Gallery" class="no-hover">Gallery</a></li> -->
     </ul>
-
+  
     <h1 id="sideheading">
-      Classification of Algorithms
+     Algorithms
     </h1>
-  </nav>
-  <!-- body -->
-  <h1>
-    Math Algorithms
-  </h1>
- <a href="../AAD/math/prime.html">primes</a>
 
- <h1>
-   Divide and conquer 
- </h1>
- <a href="../AAD/divide_and_conquer/binary_exponentiation.html">Binary Exponentiation</a>
+  </nav>
+
+  <div class="second_nav">
+
+
+    <button class="button" id="b_introduction" onclick="Toggle('introduction')">Classification</button>
+    <button class="button" id="b_algorithm_list_1" onclick="Toggle('algorithm_list_1')">Math Algorithms</button>
+    <button class="button" id="b_algorithm_list_2" onclick="Toggle('algorithm_list_2')">Divide and Conquer</button>
+    <button class="button" id="b_algorithm_list_3" onclick="Toggle('algorithm_list_3')">Sorting Algorithms</button>
+    <button class="button" id="b_algorithm_list_4" onclick="Toggle('algorithm_list_4')">Searching Algorithms</button>
+    <button class="button" id="b_algorithm_list_5" onclick="Toggle('algorithm_list_5')" style="margin-top: 200px;">Order
+      Statistics</button>
+    <button class="button" id="b_algorithm_list_6" onclick="Toggle('algorithm_list_6')">Dynamic Programming</button>
+    <button class="button" id="b_algorithm_list_7" onclick="Toggle('algorithm_list_7')">Greedy Algorithms</button>
+    <button class="button" id="b_algorithm_list_8" onclick="Toggle('algorithm_list_8')">Graph Algorithms</button>
+
+    <!-- <button class="button" id="b_resources" onclick="Toggle('resources')">Resources</button> -->
+  </div>
+
+  <!-- body -->
+  <div class="content">
+    <h1 class="heading">Some Important Algorithms</h1>
+
+    <div id="introduction">
+
+      <!-- introduction -->
+      <h2 class="classify">Classification :</h2>
+      <!-- divide and conquer -->
+ 
+      <p class="classify_text">
+        Classification is a natural habit of huamnbeings. A house wife would classify her utensils, spices, sarees and a
+        school student would classify his/her books, toys, pens and pencils etc. Knowledge has been classified
+        into different categories such as History, Biology, Mathematics, Anthropology etc.
+      </p>
+      <br>
+      <p class="classify_text">
+        Similarly for convenience  Math and computer algorithms have been classified into different categories such as
+      </p>
+      <br>
+      <h2 class="classify">Math Algorithms:</h2>
+      <p class="classify_text">These are algorithms developed as part of number theory (like checking primality etc., ), linear algebra, polynomials , geometry ( like creating convex-hull ) etc.,</p>
+      <br>
+
+      <h2 class="classify">Divide and conquer Algorithms:</h2>
+      <p class="classify_text">
+        These divide the problem into subproblems and after solving these simple subproblems, the solutions of
+        subproblems are used to solve the actual problem.
+      </p>
+      <br>
+
+      <h2 class="classify">Sorting Algorithms:</h2>
+      <p class="classify_text">
+        These are algorithms used to sort data. Depending on amount and type of data we select particular algorithm to sort the data. 
+      </p>
+      <br>
+
+      <h2 class="classify">Searching Algorithms:</h2>
+   
+      <p class="classify_text">
+        These  are algorithms used in searching data . Depending on whether data is sorted or not we select the algorithm to search the data. 
+      </p>
+      <br>
+      <h2 class="classify">Order Statistics:</h2>
+      <p class="classify_text">These are algorithms used in finding kth order statistic ( kth smallest element ) in a given array. </p>
+      <br>
+
+      <!-- dynamic programming -->
+      <h2 class="classify">Dynamic Programming Algorithms:</h2>
+      <p class="classify_text">
+        These also divide the problem into subproblems but here there are <b> overlapping subproblems </b>.So we solve
+        each subproblem only once and store the result and use it in future when needed.
+      </p>
+      <p class="classify_text"> If the problem's optimal solution can be constructed from its sub problems' optimal solutions
+        then the problem is said to have <b> optimal substructure property</b>.</p>
+      <p class="classify_text"> If there is no optimal substructure property then we can not use the solutions to the sub
+        problems to construct the solution of actual problem. </p>
+      <!-- greedy -->
+      <br>
+
+      <h2 class="classify">Greedy Algorithms:</h2>
+      <p class="classify_text">
+        These algorithms pick optimal choices at every step of the algorithm but finally the final solution obtained
+        need not be optimal.
+      </p>
+      <br>
+
+      <h2 class="classify">Graph Algorithms:</h2>
+<p class="classify_text">
+
+  These algorithms are used in graphs to either traverse them or find shortest paths between nodes, find connected components, minimum spanning trees and many more.
+</p>
+      <br>
+      <p class="classify_text" style="color: rgb(91, 182, 64);">There are many more categories like Quantum Algorithms, Bio Algorithms etc., which I plan to add to the list soon. In the mean time click on each category link on the left to go through the list of algorithms under that category. </p>
+    </div>
+
+
+
+    <div id="algorithm_list_1" class="methods">
+
+      <h1 class="side_heading">
+        Math Algorithms
+      </h1>
+      <ol>
+        <li><a href="../AAD/math/prime/prime.html" class="algorithm">Prime Numbers</a></li>
+        <li><a href="../AAD/math/gcd/gcd.html" class="algorithm">GCD</a></li>
+        <li><a href="../AAD/math/binary_exponentiation/binary_exponentiation.html" class="algorithm">Binary
+            Exponentiation</a></li>
+        <li><a href="../AAD/math/fibonacci/fibonacci.html" class="algorithm">Fibonacci sequence</a></li>
+        <li>
+          <p style="color:rgb(158, 158, 158);">Fast Fourier Transform ( FFT ) ( Pending ) </p>
+        </li>
+
+      </ol>
+    </div>
+    <div id="algorithm_list_2" class="methods">
+
+      <h1 class="side_heading">
+        Divide and conquer Algorithms
+      </h1>
+      <ol>
+        <li>
+          <h1 class="side_heading">Sorting Algorithms</h1>
+          <ol>
+            <li><a href="../AAD/divide_and_conquer/merge_sort.html" class="algorithm">Merge sort</a></li>
+            <li><a href="../AAD/divide_and_conquer/quick_sort.html" class="algorithm">quick sort</a></li>
+          </ol>
+        </li>
+
+        <li>
+          <h1 class="side_heading">Searching Algorithm</h1>
+          <ol>
+            <li><a href="../AAD/divide_and_conquer/binary_search.html" class="algorithm">Binary search</a></li>
+          </ol>
+        </li>
+        <li>
+
+          <h1 class="side_heading">Order statistics Algorithms</h1>
+          <ol>
+
+            <li><a href="../AAD/divide_and_conquer/median_finding.html" class="algorithm">median finding</a></li>
+            <li><a href="../AAD/divide_and_conquer/kth_smallest_number.html" class="algorithm">Kth smallest number</a>
+            </li>
+          </ol>
+        </li>
+        <li>
+          <h1 class="side_heading">
+            Some more divide and conquer algorithms
+          </h1>
+          <ol>
+            <li>
+              <p style="color:rgb(158, 158, 158);"> Maximal-subarray problem ( pending )
+            </li>
+            <li>
+              <p style="color:rgb(158, 158, 158);">Strassen's Algorithm ( pending ) </p>
+            </li>
+            <li>
+              <p style="color:rgb(158, 158, 158);">Karatsuba algorithm ( pending ) </p>
+            </li>
+          </ol>
+        </li>
+      </ol>
+    </div>
+    <div class="methods" id="algorithm_list_3">
+
+      <h1 class="side_heading">
+        Sorting Algorithms
+      </h1>
+      <ol>
+        <li><a href="../AAD/sorting/bubble_sort.html" class="algorithm">Bubble sort</a></li>
+        <li><a href="../AAD/sorting/insertion_sort.html" class="algorithm">Insertion sort</a></li>
+        <li><a href="../AAD/sorting/linear_sort.html" class="algorithm">Linear sort</a></li>
+        <li><a href="../AAD/sorting/quick_sort.html" class="algorithm">Quick sort</a></li>
+        <li><a href="../AAD/sorting/merge_sort.html" class="algorithm">Merge sort</a></li>
+        <li><a href="../AAD/sorting/counting_sort.html" class="algorithm">counting sort</a></li>
+        <li><a href="../AAD/sorting/radix_sort.html" class="algorithm">Radix sort</a></li>
+        <li><a href="../AAD/sorting/heap_sort.html" class="algorithm">Heap sort</a></li>
+        <li><a href="../AAD/sorting/bucket_sort.html" class="algorithm">Bucket sort</a></li>
+        <li>
+          <p style="color:rgb(158, 158, 158);">External sort ( pending )</p>
+        </li>
+      </ol>
+    </div>
+
+    <div class="methods" id="algorithm_list_4">
+
+      <h1 class="side_heading">
+        Searching Algorithms
+      </h1>
+      <ol>
+        <li><a href="../AAD/searching/linear_search.html" class="algorithm">linear search</a></li>
+        <li><a href="../AAD/searching/binary_search.html" class="algorithm">binary search</a></li>
+      </ol>
+    </div>
+    <div class="methods" id="algorithm_list_5">
+
+      <h1 class="side_heading">
+        Order statistics
+      </h1>
+      <ol>
+        <li><a href="../AAD/order_statistics/median_finding.html" class="algorithm">median finding</a></li>
+        <li><a href="../AAD/order_statistics/kth_smallest_number.html" class="algorithm">kth smallest number</a></li>
+      </ol>
+    </div>
+    <div class="methods" id="algorithm_list_6">
+
+      <h1 class="side_heading">
+        Dynamic Programming Algorithms
+      </h1>
+      <ol>
+        <li><a href="../AAD/dynamic_programming/matrix_chain_multiplication.html" class="algorithm">Matrix chain
+            multiplication</a></li>
+        <li><a href="../AAD/dynamic_programming/longest_common_subsequence.html" class="algorithm">Longest common
+            subsequence</a></li>
+
+        <li><a href="../AAD/dynamic_programming/knapsack.html" class="algorithm">Knapsack</a></li>
+
+        <li><a href="../AAD/dynamic_programming/edit_distance.html" class="algorithm">Edit distance</a></li>
+
+        <li>
+          <p style="color:rgb(158, 158, 158);">Balancing brackets ( pending ) </p>
+        </li>
+        <li>
+          <p style="color:rgb(158, 158, 158);">Independent sets in trees ( pending ) </p>
+        </li>
+      </ol>
+    </div>
+
+    <div class="methods" id="algorithm_list_7">
+
+      <h1 class="side_heading">
+        Greedy Algorithms
+      </h1>
+      <ol>
+        <li><a href="../AAD/greedy/dijkstra.html" class="algorithm">Dijkstra's Shortest path algorithm</a>
+        </li>
+        <li><a href="../AAD/greedy/kruskal.html" class="algorithm">Kruskal's Algorithm</a> </li>
+        <li><a href="../AAD/greedy/prims.html" class="algorithm">Prim's Algorithm</a> </li>
+        <!-- <li><a href="" class="algorithm"></a>  </li> -->
+
+
+        <li>
+          <p style="color:rgb(158, 158, 158);"> Activity selection ( pending )</p>
+        </li>
+        <li>
+          <p style="color:rgb(158, 158, 158);"> Huffman codes ( pending )</p>
+        </li>
+        <li>
+          <p style="color:rgb(158, 158, 158);;"> Set cover Approximation ( pending )</p>
+        </li>
+      </ol>
+    </div>
+
+    <div class="methods" id="algorithm_list_8">
+
+      <h1 class="side_heading">
+        Graph Algorithms
+      </h1>
+      <ol>
+        <li>
+          <h2 class="side_heading">
+            Traversal Algorithms
+          </h2>
+          <ol>
+            <li><a href="../AAD/graph_algorithms/dfs.html" class="algorithm">DFS</a></li>
+            <li><a href="../AAD/graph_algorithms/bfs.html" class="algorithm">BFS</a></li>
+          </ol>
+        </li>
+        <li>
+          <h2 class="side_heading">
+            Shortest paths
+          </h2>
+          <ol>
+            <li><a href="../AAD/graph_algorithms/dijkstra.html" class="algorithm">Dijkstra's Shortest path Algorithm</a>
+            </li>
+            <li><a href="../AAD/graph_algorithms/bellman_ford.html" class="algorithm">Bellman Ford</a></li>
+            <li><a href="../AAD/graph_algorithms/floyd_warshall.html" class="algorithm">Floyd warshall</a></li>
+            <li><a href="../AAD/graph_algorithms/jhonson.html" class="algorithm">Jhonson's algorithm</a></li>
+          </ol>
+        </li>
+
+        <li>
+          <h2 class="side_heading">
+            Strongly connected components
+          </h2>
+          <ol>
+            <li><a href="../AAD/graph_algorithms/kosaraju.html" class="algorithm">Kosaraju's algorithm</a></li>
+          </ol>
+        </li>
+
+        <li>
+          <h2 class="side_heading">
+            MST
+          </h2>
+          <ol>
+            <li><a href="../AAD/graph_algorithms/kruskal.html" class="algorithm">Kruskal's algorithm</a></li>
+            <li><a href="../AAD/graph_algorithms/prims.html" class="algorithm">Prim's algorithm</a></li>
+          </ol>
+        </li>
+        <li>
+          <h2 class="side_heading">
+            Maximum Flow
+          </h2>
+          <ol>
+            <li>
+              <p style="color:rgb(158, 158, 158);">Ford Fulkerson ( pending )</p>
+            </li>
+            <li>
+              <p style="color:rgb(158, 158, 158);">Dinic's algorithm</a> ( pending )</p>
+            </li>
+          </ol>
+        </li>
+
+      </ol>
+
+    </div>
+
+  </div>
 </body>
 
-<script src="../js/navbar.js"></script>
 </html>

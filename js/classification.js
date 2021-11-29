@@ -1,28 +1,50 @@
-
 window.onload = function () {
     // document.getElementById('introduction').style.display = 'none';
     document.getElementById('introduction').style.backgroundColor = "white";
     document.getElementById('introduction').style.color = "black";
     try {
-        document.getElementById('method_1').style.display = 'none';
+        document.getElementById('algorithm_list_1').style.display = 'none';
     } catch (err) {
         console.log(err);
     }
     try {
-        document.getElementById('method_2').style.display = 'none';
+        document.getElementById('algorithm_list_2').style.display = 'none';
     } catch (err) {
         console.log(err);
     }
     try {
-        document.getElementById('method_3').style.display = 'none';
+        document.getElementById('algorithm_list_3').style.display = 'none';
     } catch (err) {
         console.log(err);
     }
     try {
-        document.getElementById('method_4').style.display = 'none';
+        document.getElementById('algorithm_list_4').style.display = 'none';
     } catch (err) {
         console.log(err);
     }
+
+    try {
+        document.getElementById('algorithm_list_5').style.display = 'none';
+    } catch (err) {
+        console.log(err);
+    }
+    try {
+        document.getElementById('algorithm_list_6').style.display = 'none';
+    } catch (err) {
+        console.log(err);
+    }
+    try {
+        document.getElementById('algorithm_list_7').style.display = 'none';
+    } catch (err) {
+        console.log(err);
+    }
+    try {
+        document.getElementById('algorithm_list_8').style.display = 'none';
+    } catch (err) {
+        console.log(err);
+    }
+
+
 
     try {
         document.getElementById('problem_1').style.display = 'none';
@@ -39,11 +61,16 @@ window.onload = function () {
     } catch (err) {
         console.log(err);
     }
-    
+    var str = sessionStorage.getItem("page");
+    if (str != null) {
+
+        Toggle(str);
+        sessionStorage.clear();
+    }
 };
 
-
 var open_block = "introduction";
+
 
 function Toggle(id) {
 
@@ -69,8 +96,11 @@ function Toggle(id) {
         document.getElementById("b_" + id).classList.add('button_select');
 
         open_block = id;
+        // localStorage.setItem("page", open_block);
+        document.getElementsByClassName("heading")[0].innerHTML = document.getElementById("b_" + id).innerHTML;
     }
     window.scrollTo({ top: 0, behavior: 'smooth' });
+
     // document.getElementsByClassName("content")[0].scrollIntoView();
 }
 
@@ -85,5 +115,3 @@ function show_solution(id) {
         x.style.display = "none";
     }
 }
-
-

@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- MathJax = {
+        options: {
+            //  HTML tags that won't be searched for math
+            skipHtmlTags: ['script', 'noscript', 'style', 'annotation', 'annotation-xml'],
+        },
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        svg: {
+            fontCache: 'global'
+        }
+    }; -->
+    <link rel="stylesheet" href="../../navigation_bar.css">
+    <link rel="stylesheet" href="../template.css">
+    <script src="../template.js"></script>
+    <script>
+        sessionStorage.setItem("page", "algorithm_list_2");
+        function goback() {
+            window.location.href = "../../html/classification.html"
+        }
+    </script>
+    <title>Kth smallest</title>
+</head>
+
+<body>
+    <nav id="navbar">
+        <img src="../../../img/myimages/roundflower1.jpg" alt="">
+        <ul id="nav_item">
+            <li><a href="../../index.html" id="home">Home</a></li>
+            <li><a href="../../html/Algorithms.html" id="Algorithms">Importance of Algorithms</a></li>
+            <li><a href="../../html/classification.html" id="Algorithms">Important Algorithms</a></li>
+            <!-- <li><a href="Skills.html" id="Skills">Skills</a></li>
+            <li><a href="Contact.html" id="Contact"> Contact</a></li>
+            <li><a href="Education.html" id="Education">Education</a></li>
+            <li><a href="sitemap.html" id="Sitemap">Sitemap</a></li>
+            <li><a href="gallery.html" id="Gallery">Gallery</a></li> -->
+        </ul>
+
+        <!-- <h1 id="sideheading">
+          fibonacci numbers
+        </h1> -->
+    </nav>
+
+    <div class="second_nav">
+        <button class="button" id="b_introduction" onclick="Toggle('introduction')">Introduction</button>
+        <button class="button" id="b_method_1" onclick="Toggle('method_1')">Algorithm 1</button>
+        <button class="button" id="b_method_2" onclick="Toggle('method_2')">Algorithm 2</button>
+        <!-- <button class="button" id="b_fibonacci_problem_1" onclick="Toggle('fibonacci_problem_1')">Problem 1</button> -->
+        <button class="button" id="b_resources" onclick="Toggle('resources')">Resources</button>
+    </div>
+
+    <div class="content">
+        <button class="backbutton" onclick="goback()">back</button>
+        <h1 class="heading">Kth smallest element</h1>
+     <div id="introduction">
+            <!-- introduction -->
+            <!-- <h2 class="side_heading">Introduction:</h2>
+            <p class="text">This is a <b> comparison based sort </b> where .....................</p>  -->
+
+            <div class="methods">
+                <h2 class="side_heading">Problem Statement:</h2>
+
+                <p class="text">find the kth smallest element in the array.</p>
+            </div>
+
+        </div>
+        <!-- Algorithm -->
+
+        <!-- Method 1:  -->
+
+        <div id="method_1" class="methods">
+            <h3 class="text"> Algorithm  </h3>
+            <p class="text">1. We modify quick sort algorithm to get the kth smallest element. </p>
+            <p class="text">2. once we get the pivot element using quick_partition() , we check if pivot is k then kth smallest si a[pivot] </p>
+            <p class="text">3. if k is less than pivot then call quick_select on subarray a[0...pivot] since kth smallest is in this array. </p>
+            <p class="text">4. if k is greater than pivot then call quick_select on subarray a[pivot...end] with k = k-pivot (measuring k w.r.t pivot ) since kth element is in right side of pivot. </p>
+            
+            <!-- Pseudo code -->
+            <!-- <h2 class="side_heading">Pseudo code : </h2>
+            <pre class="text prettyprint">
+
+    </pre> -->
+
+            <!-- code -->
+            <h2 class="side_heading">Code : </h2>
+            <pre class="prettyprint">
+    // using quick select
+    #include &lt;bits/stdc++.h&gt;
+    
+    using namespace std;
+    
+    int quick_partition(int a[], int start, int end)
+    {
+        int pivot = end;
+        int i = start;
+        int j = i;
+    
+        /*  for every element a[j] if a[j] &lt;= a[pivot]
+            then  swap it with position a[i] and increse both i and j by 1
+            else increase j  by 1*/
+    
+        while (j &lt; end)
+        {
+            if (a[j] &lt;= a[pivot])
+            {
+                swap(a[i], a[j]);
+                i++;
+            }
+            j++;
+        }
+        /* finally i will be the first position where a[i]&gt;a[pivot] 
+        so we swap these and pivot will be ith position*/
+    
+        swap(a[i], a[pivot]);
+        return i;
+    }
+    
+    int quick_select_kth(int a[], int start, int end, int k)
+    {
+    
+        int pivot;
+        while (start &lt;= end)
+        {
+            pivot = quick_partition(a, start, end);
+            int pivot_distance = pivot - start + 1;
+            //   cout &lt;&lt; "start = " &lt;&lt; start &lt;&lt; "  end = " &lt;&lt; end &lt;&lt; " pivot = " &lt;&lt; pivot &lt;&lt; "\n";
+    
+            if (pivot_distance == k)
+            {
+                return a[pivot];
+            }
+            else if (pivot_distance &gt; k)
+            {
+                end = pivot - 1;
+            }
+            else
+            {
+                k -= pivot_distance;
+                start = pivot + 1;
+            }
+        }
+            return INT_MAX;
+    }
+    
+    int main()
+    {
+        int n, k;
+        cout &lt;&lt; "Enter n: ";
+        cin &gt;&gt; n;
+        int a[n];
+        for (int i = 0; i &lt; n; i++)
+        {
+            cin &gt;&gt; a[i];
+        }
+        cout &lt;&lt; "Enter k: ";
+        cin &gt;&gt; k;
+        cout &lt;&lt; "\n";
+        int element = quick_select_kth(a, 0, n - 1, k );
+        cout &lt;&lt; k &lt;&lt; "th smallest = " &lt;&lt; element &lt;&lt; "\n";
+        // for (int i = 0; i &lt; n; i++)
+        // {
+        //     cout &lt;&lt; a[i] &lt;&lt; " ";
+        // }
+        // printf("\n");
+    }
+                
+                
+    </pre>
+            <!-- Complexity Analysis -->
+            <h2 class="side_heading"> Complexity Analysis : </h2>
+            <p class="text">best case : \(O(n)\) </p>
+            <p class="text">worst case : \(O(n^2)\) </p>
+        </div>
+
+        <div id="method_2" class="methods">
+            <h3 class="text"> Algorithm </h3>
+            <p class="text">1. In this algoithm we use median of medians as pivot in quick_partion. Everything else is same.</p>
+            <!-- Pseudo code -->
+            <!-- <h2 class="side_heading">Pseudo code : </h2>
+            <pre class="text prettyprint">
+
+    </pre> -->
+
+            <!-- code -->
+            <h2 class="side_heading">Code : </h2>
+            <pre class="prettyprint">
+    // kth smallest using median of medians as pivot
+
+    #include &lt;bits/stdc++.h&gt;
+    using namespace std;
+    
+    int find_median_of_medians(int a[], int start, int end);
+    int quick_partition(int a[], int start, int end);
+    int quick_select_kth(int a[], int start, int end, int k);
+    
+    int main()
+    {
+        int n, k;
+        cout &lt;&lt; "Enter n: ";
+        cin &gt;&gt; n;
+        int a[n];
+        for (int i = 0; i &lt; n; i++)
+        {
+            cin &gt;&gt; a[i];
+        }
+        cout &lt;&lt; "Enter k: ";
+        cin &gt;&gt; k;
+        cout &lt;&lt; "\n";
+        int element = quick_select_kth(a, 0, n - 1, k );
+        cout &lt;&lt; k &lt;&lt; "th smallest = " &lt;&lt; element &lt;&lt; "\n";
+        // for (int i = 0; i &lt; n; i++)
+        // {
+        //     cout &lt;&lt; a[i] &lt;&lt; " ";
+        // }
+        // printf("\n");
+    }
+    
+    int find_median_of_medians(int a[], int start, int end)
+    {
+        int n = end - start + 1;
+        int median[(int)ceil((float)n / 5)];
+        int i = 0;
+        int *ptr = a + start;
+        for (; i &lt; n / 5; i++)
+        {
+            sort(ptr, ptr + 5);
+    
+            median[i] = *(ptr + 3);
+            ptr += 5;
+        }
+        if (i * 5 &lt; n)
+        {
+            sort(ptr, ptr + n % 5);
+            median[i] = *(ptr + (n % 5) / 2);
+            i++;
+        }
+    
+        int median_of_medians;
+        if (i == 1)
+        {
+            median_of_medians = median[i - 1];
+        }
+        else
+        {
+            median_of_medians = quick_select_kth(median, 0, i - 1, i / 2);
+        }
+        return median_of_medians;
+    }
+    
+    int quick_partition(int a[], int start, int end)
+    {
+    
+        // move median to end
+        int median_of_medians = find_median_of_medians(a, start, end);
+        int x = start;
+        for (; x &lt;= end; x++)
+        {
+            if (a[x] == median_of_medians)
+            {
+                break;
+            }
+        }
+        swap(a[x], a[end]);
+        //////////////////////////////////////////////////
+        int pivot = end;
+        int i = start;
+        int j = i;
+    
+        /*  for every element a[j] if a[j] &lt;= a[pivot]
+            then  swap it with position a[i] and increse both i and j by 1
+            else increase j  by 1*/
+    
+        while (j &lt; end)
+        {
+            if (a[j] &lt;= a[pivot])
+            {
+                swap(a[i], a[j]);
+                i++;
+            }
+            j++;
+        }
+        /* finally i will be the first position where a[i]&gt;a[pivot] 
+        so we swap these and pivot will be ith position*/
+    
+        swap(a[i], a[pivot]);
+        return i;
+    }
+    
+    int quick_select_kth(int a[], int start, int end, int k)
+    {
+    
+        int pivot;
+        while (start &lt;= end)
+        {
+            pivot = quick_partition(a, start, end);
+            int pivot_distance = pivot - start + 1;
+            //   cout &lt;&lt; "start = " &lt;&lt; start &lt;&lt; "  end = " &lt;&lt; end &lt;&lt; " pivot = " &lt;&lt; pivot &lt;&lt; "\n";
+    
+            if (pivot_distance == k)
+            {
+                return a[pivot];
+            }
+            else if (pivot_distance &gt; k)
+            {
+                end = pivot - 1;
+            }
+            else
+            {
+                k -= pivot_distance;
+                start = pivot + 1;
+            }
+        }
+        return INT_MAX;
+    }
+                           
+                
+    </pre>
+            <!-- Complexity Analysis -->
+            <h2 class="side_heading"> Complexity Analysis : </h2>
+            <p class="text"> Time complexity : \(O(n)\) </p>
+        </div>
+
+
+        <div id="resources" class="methods">
+
+            <h2>
+                video resources
+            </h2>
+
+            <h2>
+                web resources
+            </h2>
+
+            <h2>
+                book resources
+            </h2>
+
+        </div>
+
+
+    </div>
+</body>
+<script>
+    MathJax = {
+        options: {
+            //  HTML tags that won't be searched for math
+            skipHtmlTags: ['script', 'noscript', 'style', 'annotation', 'annotation-xml'],
+        },
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        svg: {
+            fontCache: 'global'
+        }
+    };
+
+</script>
+
+</html>

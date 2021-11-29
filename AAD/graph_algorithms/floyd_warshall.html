@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- MathJax = {
+        options: {
+            //  HTML tags that won't be searched for math
+            skipHtmlTags: ['script', 'noscript', 'style', 'annotation', 'annotation-xml'],
+        },
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        svg: {
+            fontCache: 'global'
+        }
+    }; -->
+    <link rel="stylesheet" href="../../navigation_bar.css">
+    <link rel="stylesheet" href="../template.css">
+    <script src="../template.js"></script>
+    <script>
+        sessionStorage.setItem("page", "algorithm_list_8");
+        function goback() {
+            window.location.href = "../../html/classification.html"
+        }
+    </script>
+    <title>Floyd Warshall</title>
+</head>
+
+<body>
+    <nav id="navbar">
+        <img src="../../../img/myimages/roundflower1.jpg" alt="">
+        <ul id="nav_item">
+            <li><a href="../../index.html" id="home">Home</a></li>
+            <li><a href="../../html/Algorithms.html" id="Algorithms">Importance of Algorithms</a></li>
+            <li><a href="../../html/classification.html" id="Algorithms">Important Algorithms</a></li>
+            <!-- <li><a href="Skills.html" id="Skills">Skills</a></li>
+            <li><a href="Contact.html" id="Contact"> Contact</a></li>
+            <li><a href="Education.html" id="Education">Education</a></li>
+            <li><a href="sitemap.html" id="Sitemap">Sitemap</a></li>
+            <li><a href="gallery.html" id="Gallery">Gallery</a></li> -->
+        </ul>
+
+        <!-- <h1 id="sideheading">
+          fibonacci numbers
+        </h1> -->
+    </nav>
+
+    <div class="second_nav">
+        <button class="button" id="b_introduction" onclick="Toggle('introduction')">Introduction</button>
+        <button class="button" id="b_method_1" onclick="Toggle('method_1')">Algorithm 1</button>
+        <!-- <button class="button" id="b_fibonacci_problem_1" onclick="Toggle('fibonacci_problem_1')">Problem 1</button> -->
+        <!-- <button class="button" id="b_resources" onclick="Toggle('resources')">Resources</button> -->
+    </div>
+
+    <div class="content">
+        <button class="backbutton" onclick="goback()">back</button>
+        <h1 class="heading">Floyd Warshall</h1>
+        <div id="introduction">
+            <!-- introduction -->
+            <h2 class="side_heading">Introduction:</h2>
+            <p class="text">This algorithm gives shortest paths in \(O(|V|^3)\) time from every vertex to every other vertex.</p>
+
+            <div class="methods">
+                <h2 class="side_heading">Problem Statement:</h2>
+
+                <p class="text">print the shortest paths from every vertex to every other vertex.</p>
+            </div>
+
+        </div>
+        <!-- Algorithm -->
+
+        <!-- Method 1:  -->
+
+        <div id="method_1" class="methods">
+            <h3 class="text"> Algorithm </h3>
+            <p class="text">1. we have an array of n numbers.</p>
+            <p class="text">2. create |V| X |V| array \(dist[][] = \infty \)  </p>
+            <p class="text">3. for each vertex k in V we relax dist[i][j] for every pair of vertices i, j . </p>
+  <p class="text">4.  Relax \(dist[i][j]\) will set \(dist[i][j] = dist[i][k]+dist[k][j]\) <br> if \(dist[i][j] > dist[i][k]+dist[k][j]\) </p>
+            <!-- Pseudo code -->
+            <!-- <h2 class="side_heading">Pseudo code : </h2>
+            <pre class="text prettyprint">
+
+    </pre> -->
+
+            <!-- code -->
+            <h2 class="side_heading">Code : </h2>
+            <pre class="prettyprint">
+    // shortest path between every pair of vertices
+    // O(V^3)
+    #include &lt;bits/stdc++.h&gt;
+    using namespace std;
+    
+    #define adjacency_list map&lt;int, vector&lt;pair&lt;int, int&gt;&gt;&gt;
+    #define mp make_pair
+    #define INF INT_MAX
+    
+    typedef struct edge
+    {
+        int u;
+        int v;
+        int w;
+    } Edge;
+    
+    typedef struct graph
+    {
+        adjacency_list adj;
+    
+        int num_edges;
+        int num_vertices;
+        Edge *edge;
+    } graph;
+    
+    void floyd_warshall(graph G)
+    {
+    ///// initialisation
+        int dist[G.num_vertices][G.num_vertices];
+    
+        for (int i = 0; i &lt; G.num_vertices; i++)
+        {
+            for (int j = 0; j &lt; G.num_vertices; j++)
+            {
+                dist[i][j] = INF;
+            }
+            dist[i][i] = 0;
+        }
+    
+        for (int i = 0; i &lt; G.num_edges; i++)
+        {
+            dist[G.edge[i].u][G.edge[i].v] = G.edge[i].w;
+        }
+        ////////// main algorithm
+        for (int k = 0; k &lt; G.num_vertices; k++)
+        {
+            for (int i = 0; i &lt; G.num_vertices; i++)
+            {
+                for (int j = 0; j &lt; G.num_vertices; j++)
+                {
+                    if (dist[k][j] != INF && dist[i][k] != INF && dist[i][j] &gt; dist[i][k] + dist[k][j])
+                    {
+                        dist[i][j] = dist[i][k] + dist[k][j];
+                    }
+                }
+            }
+        }
+    ////// printing out
+        for (int i = 0; i &lt; G.num_vertices; i++)
+        {
+            for (int j = 0; j &lt; G.num_vertices; j++)
+            {
+                if (dist[i][j] == INF)
+                {
+                    cout &lt;&lt; "INF  ";
+                }
+                else
+                {
+                    printf("%-4d ", dist[i][j]);
+                }
+            }
+            cout &lt;&lt; "\n";
+        }
+    }
+    
+    int main()
+    {
+        // undirected graph
+    
+        graph G; // u - {{v1,w1}, {v2, w2}, .... {vk,wk}}
+        cin &gt;&gt; G.num_vertices;
+        cin &gt;&gt; G.num_edges;
+        G.edge = new Edge[G.num_edges];
+        int u, v, w;
+        for (int i = 0; i &lt; G.num_edges; i++)
+        {
+            cin &gt;&gt; G.edge[i].u &gt;&gt; G.edge[i].v &gt;&gt; G.edge[i].w;
+        }
+        floyd_warshall(G);
+        // cout &lt;&lt; "\n";
+    }
+                       
+    </pre>
+            <!-- Complexity Analysis -->
+            <h2 class="side_heading"> Complexity Analysis : </h2>
+            <p class="text">Time complexity : \(O(n^3)\).</p>
+        </div>
+
+        <div id="resources" class="methods">
+
+            <h2>
+                video resources
+            </h2>
+
+            <h2>
+                web resources
+            </h2>
+<p class="text"><a href="https://en.wikipedia.org/wiki/Floyd%E2%80%93Warshall_algorithm" style="text-decoration: none;">Floyd warshall wikipedia</a></p>
+            <h2>
+                book resources
+            </h2>
+
+        </div>
+
+
+    </div>
+</body>
+<script>
+    MathJax = {
+        options: {
+            //  HTML tags that won't be searched for math
+            skipHtmlTags: ['script', 'noscript', 'style', 'annotation', 'annotation-xml'],
+        },
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        svg: {
+            fontCache: 'global'
+        }
+    };
+
+</script>
+
+</html>

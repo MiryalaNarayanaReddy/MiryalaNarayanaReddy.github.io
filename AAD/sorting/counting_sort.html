@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- MathJax = {
+        options: {
+            //  HTML tags that won't be searched for math
+            skipHtmlTags: ['script', 'noscript', 'style', 'annotation', 'annotation-xml'],
+        },
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        svg: {
+            fontCache: 'global'
+        }
+    }; -->
+    <link rel="stylesheet" href="../../navigation_bar.css">
+    <link rel="stylesheet" href="../template.css">
+    <script src="../template.js"></script>
+    <script>
+        sessionStorage.setItem("page", "algorithm_list_3");
+        function goback() {
+            window.location.href = "../../html/classification.html"
+        }
+    </script>
+    <title>Counting sort</title>
+</head>
+
+<body>
+    <nav id="navbar">
+        <img src="../../../img/myimages/roundflower1.jpg" alt="">
+        <ul id="nav_item">
+            <li><a href="../../index.html" id="home">Home</a></li>
+            <li><a href="../../html/Algorithms.html" id="Algorithms">Importance of Algorithms</a></li>
+            <li><a href="../../html/classification.html" id="Algorithms">Important Algorithms</a></li>
+            <!-- <li><a href="Skills.html" id="Skills">Skills</a></li>
+            <li><a href="Contact.html" id="Contact"> Contact</a></li>
+            <li><a href="Education.html" id="Education">Education</a></li>
+            <li><a href="sitemap.html" id="Sitemap">Sitemap</a></li>
+            <li><a href="gallery.html" id="Gallery">Gallery</a></li> -->
+        </ul>
+
+        <!-- <h1 id="sideheading">
+          fibonacci numbers
+        </h1> -->
+    </nav>
+
+    <div class="second_nav">
+        <button class="button" id="b_introduction" onclick="Toggle('introduction')">Introduction</button>
+        <button class="button" id="b_method_1" onclick="Toggle('method_1')">Algorithm 1</button>
+        <!-- <button class="button" id="b_fibonacci_problem_1" onclick="Toggle('fibonacci_problem_1')">Problem 1</button> -->
+        <!-- <button class="button" id="b_resources" onclick="Toggle('resources')">Resources</button> -->
+    </div>
+
+    <div class="content">
+        <button class="backbutton" onclick="goback()">back</button>
+        <h1 class="heading">Counting sort</h1>
+        <div id="introduction">
+            <!-- introduction -->
+            <h2 class="side_heading">Introduction:</h2>
+            <p class="text"> When we know that all array elements lie between two numbers or between 0 and k then this algorithm is used provided numbers are almost evenly distributed.  </p>
+            <p class="text"> This is an algorithm which can sort an array in \(O(n+k)\) time. </p>
+            <p class="text"> This algorithm is not good when n is small and k is big ... because we could have sorted the array in \(O(nlogn)\) time using mergesort.</p>
+
+            <div class="methods">
+                <h2 class="side_heading">Problem Statement:</h2>
+
+                <p class="text">Sort an array of n integers</p>
+            </div>
+
+        </div>
+        <!-- Algorithm -->
+
+        <!-- Method 1:  -->
+
+        <div id="method_1" class="methods">
+            <h3 class="text"> Algorithm </h3>
+            <p class="text">1. we have an array of n numbers and given that all numbers lie between 0 and k both inclusive.</p>
+            <p class="text">2. create  an array of size k+1 with all numbers initialised to zero.</p>
+            <p class="text">3. Then for every element a[i] in given array increament count[a[i]]. </p>
+            <p class="text">4. You can now just print the sorted array as output by scanning through count[] array and print i count[i] times. </p>
+            <p class="text">5. but if you want to store it some other array , you could use similar logic used in step 4 to get sorted array elements</p>
+            <p class="text">6. Following implementation shows another way getting sorted array ( in another separate array ) but in 2*O(n) time using cummulative frequencies to determine the position of a[i] in sorted array directly and placing it there in sorted array . </p>
+            <!-- Pseudo code -->
+            <h2 class="side_heading">Pseudo code : </h2>
+            <pre class="text prettyprint">
+counting_sort(a[], b[], n, k):
+    c[k+1] = {0}
+    for i = 0 to n:
+        c[ a[i] ]++
+    for i = 1 to n:
+        c[i] += c[i-1] // cummulative frequency
+    for i = 0 to n:
+        b[  c[a[i]]-1 ] = a[i] 
+        c[a[i]]--
+    </pre>
+
+            <!-- code -->
+            <h2 class="side_heading">Code : </h2>
+            <pre class="prettyprint">
+    #include &lt;bits/stdc++.h&gt;
+    using namespace std;
+
+    void counting_sort(int a[], int b[], int n, int k)
+    { //a,b, are of size n and have values in range [0,k] (inclusive)
+        int c[k + 1] = {0};
+        for (int i = 0; i &lt; n; i++)
+        {
+            c[a[i]]++;
+        }
+        for (int i = 1; i &lt;= k; i++) // cummulative sum
+        {
+            c[i] += c[i - 1];
+        }
+        for (int i = 0; i &lt; n; i++)
+        {
+            b[c[a[i]] - 1] = a[i]; // 0 based indexing
+            c[a[i]]--;
+        }
+    }
+    
+    int main()
+    {
+        int n, k;
+        cout &lt;&lt; "Enter n: ";
+        cin &gt;&gt; n;
+        cout &lt;&lt; "Enter k: ";
+        cin &gt;&gt; k;
+    
+        int a[n];
+        int b[n];
+    
+        for (int i = 0; i &lt; n; i++)
+        {
+            cin &gt;&gt; a[i];
+        }
+        counting_sort(a, b, n, k);
+    
+        for (int i = 0; i &lt; n; i++)
+        {
+            cout &lt;&lt; b[i] &lt;&lt; " ";
+        }
+        printf("\n");
+    }
+    </pre>
+            <!-- Complexity Analysis -->
+            <h2 class="side_heading"> Complexity Analysis : </h2>
+            <p class="text">Time complexity is \(O(n)\) </p>
+        </div>
+
+        <div id="resources" class="methods">
+
+            <h2>
+                video resources
+            </h2>
+
+            <h2>
+                web resources
+            </h2>
+
+            <h2>
+                book resources
+            </h2>
+
+        </div>
+
+
+    </div>
+</body>
+<script>
+    MathJax = {
+        options: {
+            //  HTML tags that won't be searched for math
+            skipHtmlTags: ['script', 'noscript', 'style', 'annotation', 'annotation-xml'],
+        },
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        svg: {
+            fontCache: 'global'
+        }
+    };
+
+</script>
+
+</html>
