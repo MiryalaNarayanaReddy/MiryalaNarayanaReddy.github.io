@@ -68,7 +68,10 @@
             <!-- <h2 class="side_heading">Introduction:</h2> -->
             <div class="methods">
                 <h2 class="side_heading">Problem Statement:</h2>
+                <p class="text">
 
+                    find maximum number of items that can be put in a knapsack of capacity \(W\) from n items with \(i^{th}\) item having weight  \(w_i\) and value \(v_i\) .
+                </p>
                 <p class="text"></p>
             </div>
 
@@ -79,7 +82,8 @@
 
         <div id="method_1" class="methods">
             <h3 class="text"> Algorithm </h3>
-            <!-- <p class="text">1. we have an array of n numbers.</p> -->
+            <p class="text">1. If the total items weigh less than or equal to \(W\) then we include it and not include it and take the maximum of these two knapsack() return values. </p>
+            <p class="text">2.  else ignore this item and return knapsack() of remaining items.</p>
             <!-- Pseudo code -->
             <h2 class="side_heading">Pseudo code : </h2>
             <pre class="text prettyprint">
@@ -111,7 +115,7 @@ knapsack(weight[],value[],w,n):
     
     */
     
-    int kanpsack(int weight[], int value[], int w, int n)
+    int knapsack(int weight[], int value[], int w, int n)
     {
         if (n == 0||w==0)
         {
@@ -120,14 +124,14 @@ knapsack(weight[],value[],w,n):
         int max1, max2, maximum;
         if (weight[n-1] &lt;= w)
         {
-            // max1 = 1 + kanpsack(weight, value, w - weight[n], n - 1);
-            max1 = value[n-1] + kanpsack(weight, value, w - weight[n-1], n - 1);
-            max2 = kanpsack(weight, value, w, n - 1);
+            // max1 = 1 + knapsack(weight, value, w - weight[n], n - 1);
+            max1 = value[n-1] + knapsack(weight, value, w - weight[n-1], n - 1);
+            max2 = knapsack(weight, value, w, n - 1);
             maximum = max1 &gt; max2 ? max1 : max2;
         }
         else
         {
-            maximum = kanpsack(weight, value, w, n - 1);
+            maximum = knapsack(weight, value, w, n - 1);
         }
         return maximum;
     }
@@ -145,7 +149,7 @@ knapsack(weight[],value[],w,n):
         {
             cin &gt;&gt; value[i];
         }
-        cout &lt;&lt; "number of items = " &lt;&lt; kanpsack(weight, value, w, n)&lt;&lt;"\n";
+        cout &lt;&lt; "number of items = " &lt;&lt; knapsack(weight, value, w, n)&lt;&lt;"\n";
     }
                         
     </pre>

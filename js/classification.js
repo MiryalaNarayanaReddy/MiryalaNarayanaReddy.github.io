@@ -1,7 +1,7 @@
 window.onload = function () {
     // document.getElementById('introduction').style.display = 'none';
-    document.getElementById('introduction').style.backgroundColor = "white";
-    document.getElementById('introduction').style.color = "black";
+   document.getElementById('b_introduction').classList.remove('button');
+    document.getElementById('b_introduction').classList.add('button_select');
     try {
         document.getElementById('algorithm_list_1').style.display = 'none';
     } catch (err) {
@@ -66,6 +66,9 @@ window.onload = function () {
 
         Toggle(str);
         sessionStorage.clear();
+    }
+    else{
+        Toggle('introduction');
     }
 };
 

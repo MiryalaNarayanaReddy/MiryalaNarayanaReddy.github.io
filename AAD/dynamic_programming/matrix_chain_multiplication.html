@@ -64,14 +64,22 @@
         <button class="backbutton" onclick="goback()">back</button>
         <h1 class="heading">Matrix Chain Multiplication</h1>
         <div id="introduction">
-            
+
             <!-- introduction -->
             <!-- <h2 class="side_heading">Introduction:</h2> -->
-    
+
             <div class="methods">
                 <h2 class="side_heading">Problem Statement:</h2>
 
-                <p class="text"></p>
+                <p class="text"> find the minimum number of multiplications needed to multiply \(A_1, A_2, A_3, ...A_n\)
+                    where \(A_i\) is a
+                    matrix . </p>
+
+                <p class="text"> since number of columns in \(A_{i-1}\) is same as number of rows in \(A_{i}\) the input
+                    to this problem is an array \(order[\ ]\) of n+1 numbers where first number is number of rows in
+                    \(A_1\) and
+                    \(i^{th}\) (i > 1) number is number of colums in \(A_{i}\). Finally order of matrix \(A_{i}\) is
+                    \(order[i-1] \times order[i]\) .</p>
             </div>
 
         </div>
@@ -81,8 +89,11 @@
 
         <div id="method_1" class="methods">
             <h3 class="text"> Algorithm </h3>
-            <!-- <p class="text">1. we have an array of n numbers.</p> -->
-  
+            <p class="text">1. slipt the matrix multiplication \(A_i.A_{i+1}....A_j\) for every k from i to j.</p>
+            <p class="text">2. We call mcm( ) for matrices \(A_i\) to \(A_k\) and for \(A_{k+1}\) to \(A_j\) and add
+                these two with \(order[i - 1] * order[k] * order[j]\) which is number of multiplication needed for
+                multiplying these two parts. </p>
+<p class="text">3. return minimum value of \(mcm(A_i ...A_k) + mcm(A_{k+1} .. A_j) +  order[i - 1] * order[k] * order[j]\)  for all k in i to j </p>
             <!-- Pseudo code -->
             <!-- <h2 class="side_heading">Pseudo code : </h2>
             <pre class="text prettyprint">
