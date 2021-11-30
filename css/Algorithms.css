@@ -37,7 +37,14 @@ a{
 }
 
 .my_video{
-  margin: 2px solid black;
+  
+  /* margin: 2px solid black; */
   margin-left: 20px;
   padding: 10px;
 }
+
+/* iframe{
+  float: left;
+  padding: 20px;
+  border: 0px;
+} */

@@ -1,8 +1,8 @@
 
 window.onload = function () {
     // document.getElementById('introduction').style.display = 'none';
-    document.getElementById('definition').style.backgroundColor = "white";
-    document.getElementById('definition').style.color = "black";
+    document.getElementById('b_definition').classList.remove('button');
+    document.getElementById('b_definition').classList.add('button_select');
     try {
         document.getElementById('importance').style.display = 'none';
     } catch (err) {
