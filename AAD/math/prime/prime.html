@@ -365,8 +365,6 @@
 
                 <h3>solution 1</h3>
                 <pre class="prettyprint" id="prime_solution_1a">
-    // print prime upto n
-    // complexity O()
     #include &lt;stdio.h&gt;
     #include &lt;stdbool.h&gt;
     #include &lt;math.h&gt;
@@ -411,47 +409,47 @@
                 <br>
                 <h3>Solution 2</h3>
                 <pre class="prettyprint" id="prime_solution_1b">
-    // print prime upto n
-    // complexity O()
+    // printing all primes less than n
+    // seive of Eratosthene
     #include &lt;stdio.h&gt;
     #include &lt;stdbool.h&gt;
-    #include &lt;math.h&gt;
-
-    bool IsPrime(int n)
+    
+    void seive_of_eratosthene(int n)
     {
-        if (n &lt; 2)
+    // initializing
+        bool prime[n + 1];
+        for (int i = 0; i &lt; n + 1; i++)
         {
-            return false;
+            prime[i] = true; // assume that everything is prime
         }
-        else if (n == 2)
+    // main part
+        for (int i = 2; i &lt; n; i++)
         {
-            return true;
-        }
-
-        for (int i = 2; i &lt;= sqrt(n); i++)
-        {
-            if (n % i == 0)
+            if (prime[i]) // i is prime
             {
-                return false;
+                for (int j = i * i; j &lt;= n; j += i) // only from i*i since i*k for k&lt;i are already covered by previous ones
+                {
+                    prime[j] = false; // multiples of i are not primes
+                }
             }
         }
-        return true;
-    }
-
-    int main()
-    {
-        int n;
-        printf("Enter a number: ");
-        scanf("%d", &n);
-
-        for(int i=2;i&lt;n;i++)
+    // console output
+        for (int i = 2; i &lt;= n; i++)
         {
-            if(IsPrime(i))
+            if (prime[i])
             {
-                printf("%d ",i);
+                printf("%d ", i);
             }
         }
         printf("\n");
+    }
+    
+    int main()
+    {
+        int n;
+        printf("Enter n: ");
+        scanf("%d", &n);
+        seive_of_eratosthene(n);
     }
     </pre>
             </div>
