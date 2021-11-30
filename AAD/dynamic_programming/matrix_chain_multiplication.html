@@ -93,7 +93,11 @@
             <p class="text">2. We call mcm( ) for matrices \(A_i\) to \(A_k\) and for \(A_{k+1}\) to \(A_j\) and add
                 these two with \(order[i - 1] * order[k] * order[j]\) which is number of multiplication needed for
                 multiplying these two parts. </p>
-<p class="text">3. return minimum value of \(mcm(A_i ...A_k) + mcm(A_{k+1} .. A_j) +  order[i - 1] * order[k] * order[j]\)  for all k in i to j </p>
+            <p class="text">3. return minimum value of \(mcm(A_i ...A_k) + mcm(A_{k+1} .. A_j) + order[i - 1] * order[k]
+                * order[j]\) for all k in i to j </p>
+
+            <p class="text">4. The same thing can be illustrated by the following figure.</p>
+            <img src="mcs.jpg" alt="mcs" width="600px" style="margin: 20px;">
             <!-- Pseudo code -->
             <!-- <h2 class="side_heading">Pseudo code : </h2>
             <pre class="text prettyprint">
