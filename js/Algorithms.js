@@ -1,28 +1,4 @@
 
-window.onload = function () {
-    // document.getElementById('introduction').style.display = 'none';
-    document.getElementById('b_definition').classList.remove('button');
-    document.getElementById('b_definition').classList.add('button_select');
-    try {
-        document.getElementById('importance').style.display = 'none';
-    } catch (err) {
-        console.log(err);
-    }
-    try {
-        document.getElementById('history').style.display = 'none';
-    } catch (err) {
-        console.log(err);
-    }
-    try {
-        document.getElementById('mastery').style.display = 'none';
-    } catch (err) {
-        console.log(err);
-    }
-
-    Toggle('definition');
-};
-
-
 var open_block = "definition";
 
 function Toggle(id) {
